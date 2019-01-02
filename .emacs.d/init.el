@@ -73,6 +73,7 @@
   :config (volatile-highlights-mode t))
 
 (use-package which-key
+  :defer nil
   :diminish nil
   :config (which-key-mode +1))
 
@@ -165,7 +166,9 @@
   :config (counsel-mode))
 
 (use-package projectile
+  :defer nil
   :diminish nil
+  :init (setq projectile-completion-system 'ivy)
   :config (projectile-mode +1)
   :bind-keymap ("M-p" . projectile-command-map))
 
