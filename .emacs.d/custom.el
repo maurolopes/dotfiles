@@ -17,11 +17,11 @@
  '(ccm-vpos-init (quote (round (* 21 (window-text-height)) 34)))
  '(cider-jdk-src-paths
    (quote
-    ("~/.java/openjv-8-src/" "~/src/opensource/clojure/src/jvm")) t)
+    ("~/.java/openjv-8-src/" "~/src/opensource/clojure/src/jvm")))
  '(cider-lein-command "~/bin/lein")
- '(cider-prompt-for-symbol nil t)
+ '(cider-prompt-for-symbol nil)
  '(cider-repl-display-help-banner nil)
- '(cider-repl-pretty-print-width 250 t)
+ '(cider-repl-pretty-print-width 250)
  '(cider-repl-use-pretty-printing t)
  '(cider-save-file-on-load t)
  '(column-enforce-column 110)
