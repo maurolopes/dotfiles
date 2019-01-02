@@ -235,6 +235,7 @@
 
 (define-key undo-tree-map (kbd "C-/") nil)
 (bind-key "C-/" 'hippie-expand)
+(bind-key "M-z" 'zap-up-to-char)
 (bind-key "C-." 'repeat)
 (bind-key "C-z" 'undo-tree-undo)
 (bind-key "C-S-z" 'undo-tree-redo)
