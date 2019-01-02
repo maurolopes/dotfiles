@@ -301,8 +301,8 @@
 
 (defun mcl/turn-current-window-into-frame ()
   "Kill this window after making a separate frame with the current buffer.
-From: https://emacs.stackexchange.com/questions/7116/pop-a-window-into-a-frame
-  (interactive)"
+From: https://emacs.stackexchange.com/questions/7116/pop-a-window-into-a-frame"
+  (interactive)
   (let ((buffer (current-buffer)))
     (unless (one-window-p)
       (delete-window))
