@@ -96,7 +96,7 @@
                     ("*info*"                      :select t   :inhibit-window-quit t                         :same t)
                     (magit-status-mode             :select t   :inhibit-window-quit t                         :same t)
                     (magit-log-mode                :select t   :inhibit-window-quit t                         :same t)
-                    shackle-default-rule '(:select t)))
+                    (:select t)))
             (shackle-mode +1)))
 
 (use-package undo-tree
