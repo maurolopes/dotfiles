@@ -153,7 +153,9 @@
 
 (use-package mwim
   :bind (("<home>" . mwim-beginning-of-code-or-line)
-         ("<end>" . mwim-end-of-code-or-line)))
+         ([remap move-beginning-of-line] . mwim-beginning-of-code-or-line)
+         ("<end>" . mwim-end-of-code-or-line)
+         ([remap move-end-of-line] . mwim-end-of-code-or-line)))
 
 (use-package amx ; better M-x interface -- integrates with Ivy
   :diminish "amx"
@@ -290,7 +292,7 @@
   ("r" dired-toggle-read-only nil)
   ("w" whitespace-mode nil)
   ("b" display-battery-mode nil)
-  ("g" git-gutter-mode nil) ;; does not work
+  ("g" git-gutter-mode nil) ; does not work
   ("G" global-git-gutter-mode nil)
   ("h" hl-line-mode nil) ("H" global-hl-line-mode nil)
   ("v" visual-line-mode nil) ("V" global-visual-line-mode nil)
