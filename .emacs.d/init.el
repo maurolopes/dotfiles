@@ -7,13 +7,12 @@
 (defvar file-name-handler-alist-old file-name-handler-alist)
 
 ;; https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_steps_to_speed_up_emacs_start/
-(defvar gc-cons-threshold--orig gc-cons-threshold)
 (setq gc-cons-threshold most-positive-fixnum
       file-name-handler-alist nil)
 
 (defun reset-gc-threshold ()
-  "Reset threshold of garbage collector to its original value, and invoke garbage colletion now."
-  (setq gc-cons-threshold gc-cons-threshold--orig
+  "Set threshold of garbage collector to a better permanent value and invoke garbage colletion now."
+  (setq gc-cons-threshold 50000000 ; 50MB
         file-name-handler-alist file-name-handler-alist-old)
   (garbage-collect))
 
@@ -36,12 +35,20 @@
 (use-package diminish
   :config (diminish 'subword-mode))
 
+(use-package exec-path-from-shell
+  :defer nil
+  :config
+  (when (memq window-system '(mac ns x))
+    ;; https://github.com/abo-abo/swiper/issues/844
+    (exec-path-from-shell-initialize)))
+
 (use-package auto-package-update
   :config (auto-package-update-maybe))
 
+(use-package ag)
+(use-package ripgrep)
 (use-package default-text-scale)
 (use-package hydra)
-(use-package ag)
 
 (use-package ws-butler ; Cleanup whitespace
   :defer nil
@@ -77,32 +84,37 @@
   :diminish nil
   :config (which-key-mode +1))
 
-(use-package shackle ; tame window popups
-  :defer nil
-  :config
-  (setq shackle-rules
-        '((compilation-mode              :select nil                                               )
-          ("*undo-tree*"                                                    :size 0.25 :align right)
-          ("*eshell*"                    :select t                          :other t               )
-          ("*Shell Command Output*"      :select nil                                               )
-          ("\\*Async Shell.*\\*" :regexp t :ignore t                                               )
-          (occur-mode                    :select nil                                   :align t    )
-          ("*Help*"                      :select t   :inhibit-window-quit t   :other t             )
-          ("*Completions*"                                                  :size 0.3  :align t    )
-          ("*Messages*"                    :select nil :inhibit-window-quit t :other t             )
-          ("\\*[Wo]*Man.*\\*"    :regexp t   :select t :inhibit-window-quit t :other t             )
-          ("\\*poporg.*\\*"      :regexp t :select t                        :other t               )
-          ("\\`\\*helm.*?\\*\\'" :regexp t                                  :size 0.3  :align t    )
-          ("*Calendar*"                  :select t                          :size 0.3  :align below)
-          ("*info*"                      :select t   :inhibit-window-quit t               :same t)
-          (magit-status-mode             :select t   :inhibit-window-quit t               :same t)
-          (magit-log-mode                :select t   :inhibit-window-quit t               :same t)
-          (:select t)))
-  (shackle-mode +1))
+;; (use-package shackle ; tame window popups
+;;   :defer nil
+;;   :config
+;;   (setq shackle-rules
+;;         '((compilation-mode              :select nil                                               )
+;;           ("*undo-tree*"                                                    :size 0.25 :align right)
+;;           ("*eshell*"                    :select t                          :other t               )
+;;           ("*Shell Command Output*"      :select nil                                               )
+;;           ("\\*Async Shell.*\\*" :regexp t :ignore t                                               )
+;;           (occur-mode                    :select nil                                   :align t    )
+;;           ("*Help*"                      :select t   :inhibit-window-quit t   :other t             )
+;;           ("*Completions*"                                                  :size 0.3  :align t    )
+;;           ("*Messages*"                    :select nil :inhibit-window-quit t :other t             )
+;;           ("\\*[Wo]*Man.*\\*"    :regexp t   :select t :inhibit-window-quit t :other t             )
+;;           ("\\*poporg.*\\*"      :regexp t :select t                        :other t               )
+;;           ("\\`\\*helm.*?\\*\\'" :regexp t                                  :size 0.3  :align t    )
+;;           ("*Calendar*"                  :select t                          :size 0.3  :align below)
+;;           ("*info*"                      :select t   :inhibit-window-quit t               :same t)
+;;           (magit-status-mode             :select t   :inhibit-window-quit t               :same t)
+;;           (magit-log-mode                :select t   :inhibit-window-quit t               :same t)
+;;           (:select t)))
+;;   (shackle-mode +1))
 
 (use-package undo-tree
   :diminish nil
-  :bind ("<S-undo>" . undo-tree-redo)
+  :bind (("s-Z" . undo-tree-redo) ; MacOS
+         ("s-z" . undo-tree-undo) ; MacOS
+         ("<undo>" . undo-tree-redo)
+         ("<S-undo>" . undo-tree-redo)
+         ("C-z" . undo-tree-undo)
+         ("C-S-z" . undo-tree-redo))
   :config (setq undo-tree-history-directory-alist `((".*" . ,temporary-file-directory)))
   :init (global-undo-tree-mode))
 
@@ -132,7 +144,20 @@
   :config (require 'hydra))
 
 (use-package avy
-  :bind ("C-l" . avy-goto-subword-1))
+  :bind ("C-l" . avy-goto-word-1)) ; avy-goto-subword-1 sometimes hangs
+
+(let ((mcl/zap-up-to-char-last-char-arg ?a))
+  (defun mcl/zap-up-to-char (arg char)
+    "With prefix, same as zap-up-to-char "
+    (interactive "p\ncZap up to char: ")
+    (setq mcl/zap-up-to-char-last-char-arg char)
+    (zap-up-to-char arg char))
+  (defun mcl/zap-up-to-same-char ()
+    (interactive)
+    ;; TODO redirect to mcl/zap-up-to-char if arg is nil
+    (zap-up-to-char 1 mcl/zap-up-to-char-last-char-arg))
+  (bind-key "M-z" 'mcl/zap-up-to-char)
+  (bind-key "M-Z" 'mcl/zap-up-to-same-char))
 
 (use-package company
   :defer nil
@@ -141,7 +166,7 @@
 
 (use-package column-enforce-mode
   :diminish nil
-  :hook ((prog-mode . column-enforce-mode))
+  :hook (()) ;;((prog-mode . column-enforce-mode))
   :config (face-spec-set column-enforce-face '((t (:background "red")))))
 
 (use-package restclient
@@ -157,22 +182,22 @@
          ("<end>" . mwim-end-of-code-or-line)
          ([remap move-end-of-line] . mwim-end-of-code-or-line)))
 
-(use-package amx ; better M-x interface -- integrates with Ivy
+(use-package amx         ; better M-x interface -- integrates with Ivy
   :diminish "amx"
   :config
   (amx-mode t))
 
 (use-package counsel
   :defer nil
-  :diminish nil
+  :diminish ""
   :config (counsel-mode))
 
 (use-package projectile
   :defer nil
-  :diminish nil
+  :diminish ""
   :init (setq projectile-completion-system 'ivy)
   :config (projectile-mode +1)
-  :bind-keymap ("M-p" . projectile-command-map))
+  :bind-keymap ("C-x p" . projectile-command-map))
 
 (use-package counsel-projectile
   :after (counsel projectile)
@@ -203,6 +228,11 @@
   :after (hydra)
   :bind ("C-x m" . #'multiple-cursors-hydra/body))
 
+(use-package rainbow-delimiters
+  :defer nil
+  :config
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+
 ;; Git
 
 (use-package magit
@@ -225,20 +255,9 @@
 
 ;; End of Git
 
-(defun mcl/kill-this-buffer ()
-  ;; http://pragmaticemacs.com/emacs/dont-kill-buffer-kill-this-buffer-instead/
-  "Kill the current buffer."
-  (interactive)
-  (kill-buffer (current-buffer)))
-(bind-key "C-x k" 'mcl/kill-this-buffer)
-
-
 (define-key undo-tree-map (kbd "C-/") nil)
 (bind-key "C-/" 'hippie-expand)
-(bind-key "M-z" 'zap-up-to-char)
 (bind-key "C-." 'repeat)
-(bind-key "C-z" 'undo-tree-undo)
-(bind-key "C-S-z" 'undo-tree-redo)
 (bind-key "C-^" (lambda () (interactive) (delete-indentation t))) ; join-line top-down
 
 (bind-key "M-o" 'other-window)
@@ -331,27 +350,38 @@ From: https://emacs.stackexchange.com/questions/7116/pop-a-window-into-a-frame"
 (use-package winner
   :init (winner-mode))
 
-(defhydra hydra-window (:color amaranth :columns 2 :idle 0.5)
+(use-package rotate ; rotate windows and layouts
+  :defer nil)
+
+(defhydra hydra-frame (:color blue)
+  ("f" make-frame "Make new frame")
+  ("d" delete-frame "delete current frame")
+  ("p" mcl/turn-current-window-into-frame "pop current window into its own frame")
+  ("q" hydra-window/body "quit"))
+
+(defhydra hydra-window (:color amaranth :idle 0.2)
   "
-_↑__↓_ resize window vertically
-_←__→_ resize window horizontally
+_↑__↓_ resize vertically _←__→_ resize horizontally _<return>_ maximize _DEL_ delete
+_<C-right>_ split right _<C-down>_ split down _o_ focus other window _SPC_ rotate windows _<C-SPC>_ rotate layout
+_r_ save window configuration _z_ undo modification _Z_ redo modification _f_ frame operations... _q_ quit
 "
   ("<right>" enlarge-window-horizontally nil) ("l" enlarge-window-horizontally nil)
   ("<left>" shrink-window-horizontally nil) ("h" shrink-window-horizontally nil)
   ("<down>" enlarge-window nil) ("j" enlarge-window nil)
   ("<up>" shrink-window nil) ("k" shrink-window nil)
-  ("<return>" delete-other-windows "maximize this window" :color blue)
-  ("<delete>" delete-window "close this window" :color blue)
-  ("<C-right>" mcl/hsplit-last-buffer "split right" :color blue) ("C-l" mcl/hsplit-last-buffer :color blue)
-  ("<C-down>" mcl/vsplit-last-buffer "split down" :color blue) ("C-j" mcl/vsplit-last-buffer :color blue)
-  ("o" other-window "move cursor to other window" :color blue)
-  ("f" make-frame "new frame" :color blue)
-  ("d" delete-frame "delete frame" :color blue)
-  ("p" mcl/turn-current-window-into-frame "pop window into new frame" :color blue)
-  ("r" window-configuration-to-register "Save window configuration" :exit t)
-  ("z" winner-undo "Undo window modification")
-  ("Z" winner-redo "Redo window modification")
-  ("q" nil "quit"))
+
+  ("<return>" delete-other-windows nil :color blue)
+  ("<deletechar>" delete-window nil :color blue) ("DEL" delete-window nil :color blue)
+  ("<C-right>" mcl/hsplit-last-buffer nil :color blue) ("C-l" mcl/hsplit-last-buffer nil :color blue)
+  ("<C-down>" mcl/vsplit-last-buffer nil :color blue) ("C-j" mcl/vsplit-last-buffer nil :color blue)
+  ("o" other-window nil :color blue)
+  
+  ("r" window-configuration-to-register nil :exit t)
+  ("z" winner-undo nil) ("Z" winner-redo nil)
+  ("f" hydra-frame/body nil :exit t)
+  ("SPC" rotate-window nil) ("<C-SPC>" rotate-layout nil)
+  ("q" nil nil)
+  ("ESC" nil nil))
 (bind-key "C-x w" 'hydra-window/body)
 
 ;; End of Windows/Frames
@@ -516,10 +546,11 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 (use-package smartparens
   :defer nil
   :diminish "{}"
+  :bind (("C-M-1" . #'multiple-cursors-hydra/body)
+         ("C-M-S-c" . #'sp-convolute-sexp))
   :config
   (progn
     (require 'smartparens-config)
-    (bind-key "C-;" 'sp-kill-sexp)
     (smartparens-global-strict-mode 1)))
 
 (use-package smart-jump
@@ -564,7 +595,7 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 
 (use-package cider ; TODO: cleanup
   :diminish ""
-  ;; :bind ("C-c k" . cider-ns-refresh)
+  :bind ("C-c r" . cider-ns-refresh)
   :custom
   (cider-prompt-for-symbol nil)
   (cider-repl-pretty-print-width 250)
@@ -594,16 +625,19 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 
 ;; Rust
 
-(use-package rustic)
+(use-package rustic
+  :mode ("\\.rs\\'" . 'rustic-mode))
 (use-package toml-mode)
 
 (use-package racer
   :init (progn
           (add-hook 'racer-mode-hook #'company-mode)
-          (add-hook 'racer-mode-hook 'eldoc-mode)))
+          (add-hook 'racer-mode-hook #'eldoc-mode)))
 
 (use-package cargo
-  :init (add-hook 'rust-mode-hook 'cargo-minor-mode))
+  :init
+  (add-hook 'rust-mode-hook 'cargo-minor-mode)
+  (add-hook 'rust-mode-hook #'racer-mode))
 
 (use-package flycheck-rust
   :init (progn (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
@@ -620,6 +654,8 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 
 (use-package feature-mode
   :mode (("\.feature$" . feature-mode)))
+
+(use-package org)
 
 ;; Python
 
@@ -642,6 +678,9 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   :mode (("\\.js\\'" . js2-mode)
          ("\\.jsx\\'" . js2-jsx-mode)))
 
+(use-package json-mode
+  :defer nil)
+
 (use-package typescript-mode
   :mode (("\\.ts\\'" . typescript-mode)
          ("\\.tsx\\'" . typescript-mode)))
@@ -659,6 +698,9 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
     ("q" nil "quit"))
   (bind-key (kbd "C-;") 'hydra-string-inflection/body))
 
+(use-package imenu-anywhere
+  :defer nil)
+
 (defhydra hydra-goto (:color blue :columns 3)
   ("<tab>" move-to-column "column")
   ("b" counsel-bookmark "bookmark")
@@ -671,6 +713,10 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   ("q" nil "quit"))
 (bind-key "M-g" 'hydra-goto/body)
 
+
+(add-hook 'prog-mode-hook 'hs-minor-mode)
+(bind-key "C-+" 'hs-toggle-hiding)
+
 ;; Considering:
 ;; Two-paned dired: http://pragmaticemacs.com/emacs/double-dired-with-sunrise-commander/
 
@@ -681,5 +727,7 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   "Ensure only one theme is active at a time."
   (mapc #'disable-theme custom-enabled-themes))
 
-(use-package eziam-theme
-  :init (load-theme 'eziam-light))
+(use-package zenburn-theme
+  :init (load-theme 'zenburn))
+
+(put 'scroll-left 'disabled nil)
