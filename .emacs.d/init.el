@@ -593,7 +593,15 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 (use-package flycheck-joker
   :init (require 'flycheck-joker))
 
-(use-package cider ; TODO: cleanup
+(use-package flycheck-clj-kondo
+  :init
+  (progn (require 'flycheck-clj-kondo)
+         (dolist (checkers '((clj-kondo-clj . clojure-joker)
+                             (clj-kondo-cljs . clojurescript-joker)
+                             (clj-kondo-cljc . clojure-joker)))
+           (flycheck-add-next-checker (car checkers) (cons 'error (cdr checkers))))))
+
+(use-package cider                      ; TODO: cleanup
   :diminish ""
   :bind ("C-c r" . cider-ns-refresh)
   :custom
