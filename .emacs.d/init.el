@@ -118,15 +118,7 @@
   :config (setq undo-tree-history-directory-alist `((".*" . ,temporary-file-directory)))
   :init (global-undo-tree-mode))
 
-(use-package centered-cursor-mode
-  :defer nil
-  :diminish (centered-cursor-mode . " ⊝")
-  :config
-  (require 'centered-cursor-mode)
-  (global-centered-cursor-mode +1))
-
 (use-package ivy
-  ;;TODO :after (centered-cursor-mode) ; doesn't work to solve the problem of <next> (PgDn) in Ivy minibuffer
   :diminish nil
   :init
   (use-package historian
