@@ -643,7 +643,12 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   :init (progn (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
                (add-hook 'rust-mode-hook 'flycheck-mode)))
 
-;; End of Rust
+
+;; Scala
+
+(use-package ensime
+  :ensure t)
+
 
 (use-package nix-mode
   :mode (("\\.nix\\'" . nix-mode)
