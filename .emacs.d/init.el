@@ -759,7 +759,7 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   "Ensure only one theme is active at a time."
   (mapc #'disable-theme custom-enabled-themes))
 
-(use-package zenburn-theme
-  :init (load-theme 'zenburn))
+(use-package gruvbox-theme
+  :init (load-theme 'gruvbox-dark-medium))
 
 (put 'scroll-left 'disabled nil)
