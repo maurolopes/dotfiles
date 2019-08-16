@@ -53,6 +53,7 @@
    (quote
     ("04232a0bfc50eac64c12471607090ecac9d7fd2d79e388f8543d1c5439ed81f5" "d057f0430ba54f813a5d60c1d18f28cf97d271fd35a36be478e20924ea9451bd" "ec5f697561eaf87b1d3b087dd28e61a2fc9860e4c862ea8e6b0b77bd4967d0ba" default)))
  '(delete-old-versions t)
+ '(elpy-rpc-python-command "python3")
  '(enable-recursive-minibuffers t)
  '(eval-sexp-fu-flash-duration 0.5)
  '(evil-want-Y-yank-to-eol nil)
@@ -82,6 +83,7 @@
    (quote
     (imenu-anywhere rotate json-mode exec-path-from-shell ripgrep anti-zenburn-theme zenburn-theme amx ws-butler feature-mode nix-drv-mode typescript-mode string-inflection default-text-scale magit-todos eglot rustic clojure-mode-extra-font-locking js2-mode prettify-symbols-mode prettify-symbols prog-mode column-enforce-mode eyebrowse company-restclient restclient no-littering which-key volatile-highlights vlf use-package undo-tree toml-mode smex smartparens smart-jump shackle rainbow-mode rainbow-delimiters racer nix-mode mwim magit keyfreq ivy-hydra git-gutter-fringe flycheck-rust flycheck-joker eziam-theme expand-region diminish counsel-projectile clj-refactor cider-eval-sexp-fu centered-cursor-mode cargo avy auto-package-update ag)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
+ '(python-shell-interpreter "ipython3")
  '(recentf-auto-cleanup (quote never))
  '(recentf-max-menu-items 20)
  '(recentf-max-saved-items 500)
