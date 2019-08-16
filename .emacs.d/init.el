@@ -120,6 +120,9 @@
 
 (use-package ivy
   :diminish nil
+  :bind
+  ([remap switch-to-buffer] . counsel-switch-buffer)
+  ([remap switch-to-buffer-other-window] . counsel-switch-buffer-other-window)
   :init
   (use-package historian
     :init (historian-mode +1)
