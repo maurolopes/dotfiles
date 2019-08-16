@@ -84,6 +84,7 @@
  '(recentf-auto-cleanup (quote never))
  '(recentf-max-menu-items 20)
  '(recentf-max-saved-items 500)
+ '(ring-bell-function (quote ignore))
  '(scroll-margin 99999)
  '(scroll-preserve-screen-position t)
  '(shackle-default-size 0.4)
