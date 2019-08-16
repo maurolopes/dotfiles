@@ -66,6 +66,7 @@
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
  '(ivy-count-format "(%d/%d) ")
+ '(ivy-height 20)
  '(ivy-use-virtual-buffers t)
  '(js-indent-level 2)
  '(kept-new-versions 6)
