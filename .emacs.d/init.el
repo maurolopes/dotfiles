@@ -745,6 +745,10 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   ("q" nil "quit"))
 (bind-key "M-g" 'hydra-goto/body)
 
+(use-package dired-sidebar
+  :ensure t
+  :bind ("<f5>" . dired-sidebar-toggle-sidebar)
+  :commands (dired-sidebar-toggle-sidebar))
 
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 (bind-key "C-+" 'hs-toggle-hiding)
