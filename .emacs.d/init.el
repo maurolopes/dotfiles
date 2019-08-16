@@ -668,10 +668,34 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 ;; Python
 
 (use-package python
-  :mode ("\\.py\\'" . python-mode)
-  :interpreter ("python" . python-mode)
-  :init (add-hook 'elpy-mode-hook 'flycheck-mode))
+  :defer 10
+  :hook python-mode-hook)
 
+(use-package ein
+  :ensure t
+  :config
+  ; (advice-add 'request--netscape-cookie-parse :around #'fix-request-netscape-cookie-parse)
+  (setq ein:worksheet-enable-undo 'yes)
+  (setq ein:truncate-long-cell-output 40)
+  (setq ein:connect-mode-hook 'ein:use-company-backend)
+  (progn
+    (setq ein:default-url-or-port "https://shell.drakirus.com")
+    ))
+
+(use-package elpy
+  :after (company python)
+  :init (elpy-enable)
+  :config
+  ;; (when (executable-find "ipython")
+  ;;   (setq python-shell-interpreter "ipython"
+  ;;         python-shell-interpreter-args "-i --simple-prompt"))
+
+  (delete 'elpy-module-highlight-indentation elpy-modules)
+  (delete 'elpy-module-flymake elpy-modules))
+
+(use-package py-autopep8
+  :after elpy
+  :hook (elpy-mode . py-autopep8-enable-on-save))
 
 (defun set-newline-and-indent ()
   "Map the return key with `newline-and-indent'."
