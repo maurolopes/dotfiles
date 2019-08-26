@@ -691,8 +691,9 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
     ("q" nil "quit"))
   (bind-key (kbd "C-;") 'hydra-string-inflection/body))
 
-(use-package imenu-anywhere
-  :defer nil)
+(use-package imenu-list
+  :ensure t
+  :bind (("C-'" . imenu-list-smart-toggle)))
 
 (defhydra hydra-goto (:color blue :columns 3)
   ("<tab>" move-to-column "column")
