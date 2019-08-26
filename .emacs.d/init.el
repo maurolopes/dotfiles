@@ -559,27 +559,6 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   :after (paredit)
   :config (smart-jump-setup-default-registers))
 
-;; (use-package prettify-symbols
-;;   :init (global-prettify-symbols-mode t)
-;;   :config
-;;   (progn
-;;     (add-hook 'emacs-lisp-mode-hook (lambda ()
-;;                                       (push '(">=" . ?≥) prettify-symbols-alist)
-;;                                       (push '("<=" . ?≤) prettify-symbols-alist)))
-;;     (let ((transforms '(("->" . ?→)
-;;                         ("->>" . ?) ;⇉)
-;;                         ("->" . (?- (Br . Bc) ?- (Br . Bc) ?>))
-;;                         ("->>" .  (?\s (Br . Bl) ?\s (Br . Bl) ?\s
-;;                                        (Bl . Bl) ?- (Bc . Br) ?- (Bc . Bc) ?>
-;;                                        (Bc . Bl) ?- (Br . Br) ?>))
-;;                         (">=" . ?≥)
-;;                         ("<=" . ?≤)
-;;                         ("not=" . ?≠)))))
-;;     (add-hook 'clojure-mode (lambda ()
-;;                               (setq clojure--prettify-symbols-alist
-;;                                     (append transforms clojure--prettify-symbols-alist))))))
-
-;; (eval-after-load 'clojure-mode '(define-clojure-indent (given :defn)))
 
 (use-package flycheck
   :config (global-flycheck-mode))
