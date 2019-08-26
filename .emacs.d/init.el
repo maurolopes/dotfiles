@@ -120,16 +120,11 @@
   (define-key undo-tree-map (kbd "C-/") nil)
   :init (global-undo-tree-mode))
 
-(use-package centered-cursor-mode
-  :defer nil
-  :diminish (centered-cursor-mode . " ⊝")
-  :config
-  (require 'centered-cursor-mode)
-  (global-centered-cursor-mode +1))
-
 (use-package ivy
-  ;;TODO :after (centered-cursor-mode) ; doesn't work to solve the problem of <next> (PgDn) in Ivy minibuffer
   :diminish nil
+  :bind
+  ([remap switch-to-buffer] . counsel-switch-buffer)
+  ([remap switch-to-buffer-other-window] . counsel-switch-buffer-other-window)
   :init
   (use-package historian
     :init (historian-mode +1)
@@ -636,7 +631,12 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   :init (progn (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
                (add-hook 'rust-mode-hook 'flycheck-mode)))
 
-;; End of Rust
+
+;; Scala
+
+(use-package ensime
+  :ensure t)
+
 
 (use-package nix-mode
   :mode (("\\.nix\\'" . nix-mode)
@@ -653,10 +653,34 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 ;; Python
 
 (use-package python
-  :mode ("\\.py\\'" . python-mode)
-  :interpreter ("python" . python-mode)
-  :init (add-hook 'elpy-mode-hook 'flycheck-mode))
+  :defer 10
+  :hook python-mode-hook)
 
+(use-package ein
+  :ensure t
+  :config
+  ; (advice-add 'request--netscape-cookie-parse :around #'fix-request-netscape-cookie-parse)
+  (setq ein:worksheet-enable-undo 'yes)
+  (setq ein:truncate-long-cell-output 40)
+  (setq ein:connect-mode-hook 'ein:use-company-backend)
+  (progn
+    (setq ein:default-url-or-port "https://shell.drakirus.com")
+    ))
+
+(use-package elpy
+  :after (company python)
+  :init (elpy-enable)
+  :config
+  ;; (when (executable-find "ipython")
+  ;;   (setq python-shell-interpreter "ipython"
+  ;;         python-shell-interpreter-args "-i --simple-prompt"))
+
+  (delete 'elpy-module-highlight-indentation elpy-modules)
+  (delete 'elpy-module-flymake elpy-modules))
+
+(use-package py-autopep8
+  :after elpy
+  :hook (elpy-mode . py-autopep8-enable-on-save))
 
 (defun set-newline-and-indent ()
   "Map the return key with `newline-and-indent'."
@@ -707,6 +731,10 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   ("q" nil "quit"))
 (bind-key "M-g" 'hydra-goto/body)
 
+(use-package dired-sidebar
+  :ensure t
+  :bind ("<f5>" . dired-sidebar-toggle-sidebar)
+  :commands (dired-sidebar-toggle-sidebar))
 
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 (bind-key "C-+" 'hs-toggle-hiding)
@@ -721,8 +749,8 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   "Ensure only one theme is active at a time."
   (mapc #'disable-theme custom-enabled-themes))
 
-(use-package zenburn-theme
-  :init (load-theme 'zenburn))
+(use-package gruvbox-theme
+  :init (load-theme 'gruvbox-dark-medium))
 
 (put 'scroll-left 'disabled nil)
 
