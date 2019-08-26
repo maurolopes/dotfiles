@@ -556,7 +556,8 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
     (smartparens-global-strict-mode 1)))
 
 (use-package smart-jump
-  :after (paredit)
+  :ensure t
+  :defer nil
   :config (smart-jump-setup-default-registers))
 
 
