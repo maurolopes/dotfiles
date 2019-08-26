@@ -560,6 +560,9 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   :defer nil
   :config (smart-jump-setup-default-registers))
 
+(use-package format-all
+  :bind*
+  ("C-M-<tab>" . format-all-buffer))
 
 (use-package flycheck
   :config (global-flycheck-mode))
