@@ -725,3 +725,25 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   :init (load-theme 'zenburn))
 
 (put 'scroll-left 'disabled nil)
+
+(use-package beacon)
+
+(defvar mcl/pair-programming nil)
+(defun mcl/pair-programming-toggle ()
+  (interactive)
+  (if mcl/pair-programming
+      (mcl/pair-programming-disable)
+    (mcl/pair-programming-enable))
+  (setq mcl/pair-programming (not mcl/pair-programming)))
+
+(defun mcl/pair-programming-enable ()
+  (interactive)
+  (global-centered-cursor-mode -1)
+  (beacon-mode +1)
+  (global-display-line-numbers-mode +1))
+
+(defun mcl/pair-programming-disable ()
+  (interactive)
+  (global-centered-cursor-mode +1)
+  (beacon-mode -1)
+  (global-display-line-numbers-mode -1))

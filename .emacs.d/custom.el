@@ -14,15 +14,18 @@
    (quote
     (111 105 101 110 100 104 119 102 112 121 117 108 103 106 122 120 99 118 109 98 107 97 114 115 116)))
  '(avy-subword-extra-word-chars nil)
+ '(beacon-blink-duration 0.4)
+ '(beacon-blink-when-point-moves-horizontally 2)
+ '(beacon-blink-when-point-moves-vertically 2)
  '(blink-cursor-mode t)
  '(ccm-recenter-at-end-of-file t)
  '(ccm-vpos-init (quote (round (* 21 (window-text-height)) 34)))
  '(cider-jdk-src-paths
    (quote
-    ("~/.java/openjv-8-src/" "~/src/opensource/clojure/src/jvm")) t)
+    ("~/.java/openjv-8-src/" "~/src/opensource/clojure/src/jvm")))
  '(cider-lein-command "~/bin/lein")
  '(cider-ns-save-files-on-refresh t)
- '(cider-prompt-for-symbol nil t)
+ '(cider-prompt-for-symbol nil)
  '(cider-repl-display-help-banner nil)
  '(cider-repl-pretty-print-width 250 t)
  '(cider-repl-use-pretty-printing t)
@@ -51,7 +54,7 @@
  '(create-lockfiles nil)
  '(custom-safe-themes
    (quote
-    ("04232a0bfc50eac64c12471607090ecac9d7fd2d79e388f8543d1c5439ed81f5" "d057f0430ba54f813a5d60c1d18f28cf97d271fd35a36be478e20924ea9451bd" "ec5f697561eaf87b1d3b087dd28e61a2fc9860e4c862ea8e6b0b77bd4967d0ba" default)))
+    ("a7051d761a713aaf5b893c90eaba27463c791cd75d7257d3a8e66b0c8c346e77" "04232a0bfc50eac64c12471607090ecac9d7fd2d79e388f8543d1c5439ed81f5" "d057f0430ba54f813a5d60c1d18f28cf97d271fd35a36be478e20924ea9451bd" "ec5f697561eaf87b1d3b087dd28e61a2fc9860e4c862ea8e6b0b77bd4967d0ba" default)))
  '(delete-old-versions t)
  '(enable-recursive-minibuffers t)
  '(eval-sexp-fu-flash-duration 0.5)
@@ -60,8 +63,10 @@
  '(expand-region-contract-fast-key "DEL")
  '(fci-rule-color "#383838")
  '(git-gutter-fr:side (quote right-fringe))
+ '(global-centered-cursor-mode t)
  '(global-font-lock-mode t)
  '(global-subword-mode t)
+ '(imenu-list-focus-after-activation t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
@@ -78,7 +83,7 @@
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(package-selected-packages
    (quote
-    (imenu-anywhere rotate json-mode exec-path-from-shell ripgrep anti-zenburn-theme zenburn-theme amx ws-butler feature-mode nix-drv-mode typescript-mode string-inflection default-text-scale magit-todos eglot rustic clojure-mode-extra-font-locking js2-mode prettify-symbols-mode prettify-symbols prog-mode column-enforce-mode eyebrowse company-restclient restclient no-littering which-key volatile-highlights vlf use-package undo-tree toml-mode smex smartparens smart-jump shackle rainbow-mode rainbow-delimiters racer nix-mode mwim magit keyfreq ivy-hydra git-gutter-fringe flycheck-rust flycheck-joker eziam-theme expand-region diminish counsel-projectile clj-refactor cider-eval-sexp-fu centered-cursor-mode cargo avy auto-package-update ag)))
+    (beacon imenu-list format-all spinner multiple-cursors projectile counsel company ivy-historian historian ivy hydra imenu-anywhere rotate json-mode exec-path-from-shell ripgrep anti-zenburn-theme zenburn-theme amx ws-butler feature-mode nix-drv-mode typescript-mode string-inflection default-text-scale magit-todos eglot rustic clojure-mode-extra-font-locking js2-mode prettify-symbols-mode prettify-symbols prog-mode column-enforce-mode eyebrowse company-restclient restclient no-littering which-key volatile-highlights vlf use-package undo-tree toml-mode smex smartparens smart-jump shackle rainbow-mode rainbow-delimiters racer nix-mode mwim magit keyfreq ivy-hydra git-gutter-fringe flycheck-rust flycheck-joker eziam-theme expand-region diminish counsel-projectile clj-refactor cider-eval-sexp-fu centered-cursor-mode cargo avy auto-package-update ag)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(recentf-auto-cleanup (quote never))
  '(recentf-max-menu-items 20)
