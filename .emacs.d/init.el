@@ -265,6 +265,7 @@
 (bind-key "M-f" 'counsel-ag)
 (bind-key "C-x C-r" 'counsel-recentf)
 (bind-key "C-x C-l" 'counsel-locate)
+(bind-key "C-x C-b" 'ibuffer-jump)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
