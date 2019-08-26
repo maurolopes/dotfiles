@@ -22,10 +22,10 @@
  '(ccm-vpos-init (quote (round (* 21 (window-text-height)) 34)))
  '(cider-jdk-src-paths
    (quote
-    ("~/.java/openjv-8-src/" "~/src/opensource/clojure/src/jvm")))
+    ("~/.java/openjv-8-src/" "~/src/opensource/clojure/src/jvm")) t)
  '(cider-lein-command "~/bin/lein")
  '(cider-ns-save-files-on-refresh t)
- '(cider-prompt-for-symbol nil)
+ '(cider-prompt-for-symbol nil t)
  '(cider-repl-display-help-banner nil)
  '(cider-repl-pretty-print-width 250 t)
  '(cider-repl-use-pretty-printing t)
@@ -60,6 +60,8 @@
     ("585942bb24cab2d4b2f74977ac3ba6ddbd888e3776b9d2f993c5704aa8bb4739" "8f97d5ec8a774485296e366fdde6ff5589cf9e319a584b845b6f7fa788c9fa9a" "a22f40b63f9bc0a69ebc8ba4fbc6b452a4e3f84b80590ba0a92b4ff599e53ad0" "c82d24bfba431e8104219bfd8e90d47f1ad6b80a504a7900cbee002a8f04392f" "05a4b82c39107308b5c3720fd0c9792c2076e1ff3ebb6670c6f1c98d44227689" "54f2d1fcc9bcadedd50398697618f7c34aceb9966a6cbaa99829eb64c0c1f3ca" "04232a0bfc50eac64c12471607090ecac9d7fd2d79e388f8543d1c5439ed81f5" "d057f0430ba54f813a5d60c1d18f28cf97d271fd35a36be478e20924ea9451bd" "ec5f697561eaf87b1d3b087dd28e61a2fc9860e4c862ea8e6b0b77bd4967d0ba" default)))
 >>>>>>> 388b4f56831460b899251ce26affb4355dea8975
  '(delete-old-versions t)
+ '(dired-dwim-target t)
+ '(dired-subtree-line-prefix "  ^")
  '(elpy-rpc-python-command "python3")
  '(enable-recursive-minibuffers t)
  '(eval-sexp-fu-flash-duration 0.5)

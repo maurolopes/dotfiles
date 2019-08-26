@@ -735,6 +735,9 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   :ensure t
   :bind ("<f5>" . dired-sidebar-toggle-sidebar)
   :commands (dired-sidebar-toggle-sidebar))
+(require 'dired-x)
+
+(bind-key "<tab>" #'dired-subtree-toggle dired-mode-map)
 
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 (bind-key "C-+" 'hs-toggle-hiding)
@@ -753,6 +756,7 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   :init (load-theme 'gruvbox-dark-medium))
 
 (put 'scroll-left 'disabled nil)
+(put 'dired-find-alternate-file 'disabled nil)
 
 (use-package beacon)
 
