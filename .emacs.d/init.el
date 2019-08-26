@@ -50,7 +50,7 @@
 (use-package default-text-scale)
 (use-package hydra)
 
-(use-package ws-butler ; Cleanup whitespace
+(use-package ws-butler                  ; Cleanup whitespace
   :defer nil
   :config (ws-butler-global-mode t))
 
