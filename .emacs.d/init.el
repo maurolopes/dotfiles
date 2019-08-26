@@ -109,13 +109,15 @@
 
 (use-package undo-tree
   :diminish nil
-  :bind (("s-Z" . undo-tree-redo) ; MacOS
-         ("s-z" . undo-tree-undo) ; MacOS
-         ("<undo>" . undo-tree-redo)
+  :defer nil
+  :bind (("s-z" . undo-tree-undo) ; MacOS
+         ("s-Z" . undo-tree-redo) ; MacOS
+         ("<undo>" . undo-tree-undo)
          ("<S-undo>" . undo-tree-redo)
          ("C-z" . undo-tree-undo)
          ("C-S-z" . undo-tree-redo))
   :config (setq undo-tree-history-directory-alist `((".*" . ,temporary-file-directory)))
+  (define-key undo-tree-map (kbd "C-/") nil)
   :init (global-undo-tree-mode))
 
 (use-package centered-cursor-mode
@@ -255,7 +257,6 @@
 
 ;; End of Git
 
-(define-key undo-tree-map (kbd "C-/") nil)
 (bind-key "C-/" 'hippie-expand)
 (bind-key "C-." 'repeat)
 (bind-key "C-^" (lambda () (interactive) (delete-indentation t))) ; join-line top-down
