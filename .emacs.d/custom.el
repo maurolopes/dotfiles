@@ -67,7 +67,6 @@
  '(global-centered-cursor-mode t)
  '(global-font-lock-mode t)
  '(global-subword-mode t)
- '(imenu-list-focus-after-activation t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
