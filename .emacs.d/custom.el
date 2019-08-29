@@ -14,9 +14,6 @@
    (quote
     (111 105 101 110 100 104 119 102 112 121 117 108 103 106 122 120 99 118 109 98 107 97 114 115 116)))
  '(avy-subword-extra-word-chars nil)
- '(beacon-blink-duration 0.4)
- '(beacon-blink-when-point-moves-horizontally 2)
- '(beacon-blink-when-point-moves-vertically 2)
  '(blink-cursor-mode t)
  '(ccm-recenter-at-end-of-file t)
  '(ccm-vpos-init (quote (round (* 21 (window-text-height)) 34)))
