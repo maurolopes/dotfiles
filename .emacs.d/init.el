@@ -760,6 +760,11 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 
 (use-package beacon)
 
+(use-package edit-server
+  :ensure t
+  :defer nil
+  :config (edit-server-start))
+
 (defvar mcl/pair-programming nil)
 (defun mcl/pair-programming-toggle ()
   (interactive)
