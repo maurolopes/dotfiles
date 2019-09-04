@@ -87,8 +87,8 @@
 (use-package undo-tree
   :diminish nil
   :defer nil
-  :bind (("s-z" . undo-tree-undo) ; MacOS
-         ("s-Z" . undo-tree-redo) ; MacOS
+  :bind (("s-z" . undo-tree-undo)       ; MacOS
+         ("s-Z" . undo-tree-redo)       ; MacOS
          ("<undo>" . undo-tree-undo)
          ("<S-undo>" . undo-tree-redo)
          ("C-z" . undo-tree-undo)
