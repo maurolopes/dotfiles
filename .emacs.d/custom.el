@@ -56,6 +56,7 @@
  '(dired-dwim-target t)
  '(dired-sidebar-subtree-line-prefix "   ")
  '(dired-subtree-line-prefix "   ")
+ '(edit-server-new-frame nil)
  '(elpy-rpc-python-command "python3")
  '(enable-recursive-minibuffers t)
  '(eval-sexp-fu-flash-duration 0.5)
