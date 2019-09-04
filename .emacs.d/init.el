@@ -82,6 +82,10 @@
 (use-package which-key
   :defer nil
   :diminish nil
+  :ensure t
+  :init
+  (setq which-key-idle-delay 0.5
+        which-key-idle-secondary-delay 0.0)
   :config (which-key-mode +1))
 
 (use-package undo-tree

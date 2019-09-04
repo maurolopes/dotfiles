@@ -129,6 +129,7 @@
  '(wakatime-python-bin nil)
  '(which-key-show-transient-maps t)
  '(which-key-side-window-max-height 0.75)
+ '(which-key-sort-order (quote which-key-prefix-then-key-order))
  '(winner-mode t))
 
 (custom-set-faces
