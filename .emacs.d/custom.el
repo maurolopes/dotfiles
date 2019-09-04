@@ -65,7 +65,6 @@
  '(expand-region-contract-fast-key "DEL")
  '(fci-rule-color "#383838")
  '(git-gutter-fr:side (quote right-fringe))
- '(global-centered-cursor-mode t)
  '(global-font-lock-mode t)
  '(global-subword-mode t)
  '(indent-tabs-mode nil)
