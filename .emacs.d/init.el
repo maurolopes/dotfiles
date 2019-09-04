@@ -32,6 +32,9 @@
   (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
+
+(use-package paradox)
+
 (use-package diminish
   :config (diminish 'subword-mode))
 
