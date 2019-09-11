@@ -14,6 +14,8 @@
    (quote
     (111 105 101 110 100 104 119 102 112 121 117 108 103 106 122 120 99 118 109 98 107 97 114 115 116)))
  '(avy-subword-extra-word-chars nil)
+ '(beacon-blink-when-point-moves-horizontally 10)
+ '(beacon-blink-when-point-moves-vertically 1)
  '(blink-cursor-mode t)
  '(ccm-recenter-at-end-of-file t)
  '(ccm-vpos-init (quote (round (* 21 (window-text-height)) 34)))
@@ -51,7 +53,7 @@
  '(create-lockfiles nil)
  '(custom-safe-themes
    (quote
-    ("8f97d5ec8a774485296e366fdde6ff5589cf9e319a584b845b6f7fa788c9fa9a" default)))
+    ("2b9dc43b786e36f68a9fd4b36dd050509a0e32fe3b0a803310661edb7402b8b6" "585942bb24cab2d4b2f74977ac3ba6ddbd888e3776b9d2f993c5704aa8bb4739" "8f97d5ec8a774485296e366fdde6ff5589cf9e319a584b845b6f7fa788c9fa9a" "a22f40b63f9bc0a69ebc8ba4fbc6b452a4e3f84b80590ba0a92b4ff599e53ad0" "c82d24bfba431e8104219bfd8e90d47f1ad6b80a504a7900cbee002a8f04392f" "05a4b82c39107308b5c3720fd0c9792c2076e1ff3ebb6670c6f1c98d44227689" "54f2d1fcc9bcadedd50398697618f7c34aceb9966a6cbaa99829eb64c0c1f3ca" "04232a0bfc50eac64c12471607090ecac9d7fd2d79e388f8543d1c5439ed81f5" "d057f0430ba54f813a5d60c1d18f28cf97d271fd35a36be478e20924ea9451bd" "ec5f697561eaf87b1d3b087dd28e61a2fc9860e4c862ea8e6b0b77bd4967d0ba" default)))
  '(delete-old-versions t)
  '(dired-dwim-target t)
  '(dired-sidebar-subtree-line-prefix "   ")
@@ -72,7 +74,9 @@
  '(initial-scratch-message nil)
  '(ivy-count-format "(%d/%d) ")
  '(ivy-height 20)
+ '(ivy-rich-path-style (quote abbrev))
  '(ivy-use-virtual-buffers t)
+ '(ivy-virtual-abbreviate (quote full))
  '(js-indent-level 2)
  '(kept-new-versions 6)
  '(load-prefer-newer t)
@@ -85,14 +89,16 @@
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(package-selected-packages
    (quote
-    (paradox edit-server beacon ensime dired-sidebar gruvbox-theme py-autopep8 elpy ein imenu-anywhere rotate json-mode exec-path-from-shell ripgrep anti-zenburn-theme zenburn-theme amx ws-butler feature-mode nix-drv-mode typescript-mode string-inflection default-text-scale magit-todos eglot rustic clojure-mode-extra-font-locking js2-mode prettify-symbols-mode prettify-symbols prog-mode column-enforce-mode eyebrowse company-restclient restclient no-littering which-key volatile-highlights vlf use-package undo-tree toml-mode smex smartparens smart-jump rainbow-mode rainbow-delimiters racer nix-mode mwim magit keyfreq ivy-hydra git-gutter-fringe flycheck-rust flycheck-joker expand-region diminish counsel-projectile clj-refactor cider-eval-sexp-fu centered-cursor-mode cargo avy auto-package-update ag)))
+    (ivy-rich paradox edit-server beacon ensime dired-sidebar gruvbox-theme py-autopep8 elpy ein imenu-anywhere rotate json-mode exec-path-from-shell ripgrep anti-zenburn-theme zenburn-theme amx ws-butler feature-mode nix-drv-mode typescript-mode string-inflection default-text-scale magit-todos eglot rustic clojure-mode-extra-font-locking js2-mode prettify-symbols-mode prettify-symbols prog-mode column-enforce-mode eyebrowse company-restclient restclient no-littering which-key volatile-highlights vlf use-package undo-tree toml-mode smex smartparens smart-jump rainbow-mode rainbow-delimiters racer nix-mode mwim magit keyfreq ivy-hydra git-gutter-fringe flycheck-rust flycheck-joker expand-region diminish counsel-projectile clj-refactor cider-eval-sexp-fu centered-cursor-mode cargo avy auto-package-update ag)))
  '(paradox-execute-asynchronously t)
+ '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(python-shell-interpreter "ipython3")
  '(recentf-auto-cleanup (quote never))
  '(recentf-max-menu-items 20)
  '(recentf-max-saved-items 500)
  '(ring-bell-function (quote ignore))
+ '(save-interprogram-paste-before-kill t)
  '(scroll-margin 99999)
  '(scroll-preserve-screen-position t)
  '(shackle-default-size 0.4)
@@ -128,6 +134,7 @@
  '(version-control t)
  '(vlf-tune-enabled nil)
  '(wakatime-python-bin nil)
+ '(which-key-idle-delay 0.1)
  '(which-key-show-transient-maps t)
  '(which-key-side-window-max-height 0.75)
  '(which-key-sort-order (quote which-key-prefix-then-key-order))
