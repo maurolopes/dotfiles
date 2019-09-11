@@ -154,7 +154,7 @@
 (use-package column-enforce-mode
   :diminish nil
   :hook (()) ;;((prog-mode . column-enforce-mode))
-  :config (face-spec-set column-enforce-face '((t (:background "red")))))
+  :config (face-spec-set column-enforce-face '((t (:background "dark-red")))))
 
 (use-package restclient
   :mode "\\.rest$")
