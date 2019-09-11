@@ -10,12 +10,14 @@
    ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
  '(auto-package-update-delete-old-versions t)
  '(auto-package-update-hide-results t)
+ '(avy-background t)
  '(avy-keys
    (quote
     (111 105 101 110 100 104 119 102 112 121 117 108 103 106 122 120 99 118 109 98 107 97 114 115 116)))
  '(avy-subword-extra-word-chars nil)
  '(beacon-blink-when-point-moves-horizontally 10)
  '(beacon-blink-when-point-moves-vertically 1)
+ '(beacon-mode t)
  '(blink-cursor-mode t)
  '(ccm-recenter-at-end-of-file t)
  '(ccm-vpos-init (quote (round (* 21 (window-text-height)) 34)))
@@ -145,4 +147,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(avy-lead-face ((t (:foreground "orange"))))
+ '(avy-lead-face-0 ((t (:foreground "white")))))
