@@ -654,8 +654,7 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   (setq ein:truncate-long-cell-output 40)
   (setq ein:connect-mode-hook 'ein:use-company-backend)
   (progn
-    (setq ein:default-url-or-port "https://shell.drakirus.com")
-    ))
+    (setq ein:default-url-or-port "https://shell.drakirus.com")))
 
 (use-package elpy
   :after (company python)
@@ -748,29 +747,39 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 (put 'scroll-left 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
 
-(use-package beacon)
-
 (use-package edit-server
   :ensure t
   :defer nil
   :config (edit-server-start))
+
+(use-package beacon)
 
 (defvar mcl/pair-programming nil)
 (defun mcl/pair-programming-toggle ()
   (interactive)
   (if mcl/pair-programming
       (mcl/pair-programming-disable)
-    (mcl/pair-programming-enable))
-  (setq mcl/pair-programming (not mcl/pair-programming)))
+    (mcl/pair-programming-enable)))
+
+(defun mcl/global-centered-cursor-mode (arg)
+  (if (> arg 0)
+      (setq maximum-scroll-margin 0.5
+            scroll-margin 99999
+            scroll-preserve-screen-position t)
+    (setq maximum-scroll-margin 0.25
+          scroll-margin 0
+          scroll-preserve-screen-position nil)))
 
 (defun mcl/pair-programming-enable ()
   (interactive)
-  (global-centered-cursor-mode -1)
+  (setq mcl/pair-programming t)
+  (mcl/global-centered-cursor-mode -1)
   (beacon-mode +1)
   (global-display-line-numbers-mode +1))
 
 (defun mcl/pair-programming-disable ()
   (interactive)
-  (global-centered-cursor-mode +1)
+  (setq mcl/pair-programming nil)
+  (mcl/global-centered-cursor-mode +1)
   (beacon-mode -1)
   (global-display-line-numbers-mode -1))
