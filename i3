@@ -36,8 +36,8 @@ font pango:snap, Tamsyn, WenQuanYi Bitmap Song, FontAwesome, Unifont 14
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec tilix
-bindsym $mod+Shift+Return exec tilix --quake
+bindsym $mod+t exec tilix
+bindsym $mod+Shift+t exec tilix --quake
 
 # kill focused window
 bindsym $mod+q kill
@@ -104,7 +104,7 @@ bindsym $mod+Shift+u exec xmodmap ~/.Xmodmap
 bindsym $mod+Control+t floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+t focus mode_toggle
+#bindsym $mod+t focus mode_toggle
 
 # focus the parent container
 #bindsym $mod+p focus parent
