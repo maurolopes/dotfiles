@@ -30,6 +30,13 @@ format = "{1m}"
 block = "sound"
 
 [[block]]
+block = "battery"
+driver = "sysfs"
+device = "BAT1"
+interval = 1
+format = "{percentage}% {time}"
+
+[[block]]
 block = "time"
 interval = 1
 format = "%a %Y-%m-%d %H:%M:%S"
