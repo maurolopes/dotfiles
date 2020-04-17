@@ -1,0 +1,49 @@
+[user]
+        email = maurolopes@gmail.com
+        name = Mauro Lopes
+[github]
+        user = maurolopes
+
+[alias]
+        a = add
+        ch = checkout
+        s = status -sb
+        l = log
+        lg = log --graph
+        d = icdiff
+        x = diff
+        df = !"git diff --color | diff-so-fancy"
+        g = "grep --break --heading"
+        p = pull
+        branch-name = "!git rev-parse --abbrev-ref HEAD"
+        publish = "!git push -u origin $(git branch-name)"
+        purge = !"git branch --merged | grep -Ev '\\*|master|develop|staging' | xargs -n 1 git branch -d"
+        standup = !"git log --since yesterday --author $(git config user.email)"
+
+[format]
+        pretty = '%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen%cn%Creset %Cblue(%cr)%Creset'
+
+[color]
+        ui = auto
+        interactive = auto
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+
+[diff]
+        tool = icdiff
+[difftool]
+        prompt = false
+[difftool "icdiff"]
+        cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
+
+[web]
+        browser = chromium
+
+[grep]
+	break = true
+        heading = true
+        lineNumber = true
+        

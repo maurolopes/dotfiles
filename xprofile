@@ -1,0 +1,14 @@
+xsetroot -cursor_name left_ptr
+
+#setxkbmap -model pc105 -layout us -variant intl -option 'terminate:ctrl_alt_bksp,ctrl:nocaps'
+#setxkbmap -model pc105 -layout us,us -variant ,intl -option ''
+setxkbmap -model pc105 -layout us,us -variant ,intl -option 'grp:rctrl_toggle,ctrl:nocaps,grp_led:caps'
+xmodmap ~/.Xmodmap
+
+xrandr --output HDMI1 --preferred --output eDP1 --pos 1800x1080
+
+clipmenud &
+autokey-gtk &
+
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
