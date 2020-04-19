@@ -251,7 +251,6 @@ bar {
 # Press $mod+x followed by the first letter to launch a program
 set $mode_launcher Launch: [f]irefox [c]hromium [e]macs [w]i-fi [p]cmanfm [o]ctopi [b]luetooth [a]udio
 bindsym $mod+x mode "$mode_launcher"
-
 mode "$mode_launcher" {
     bindsym f exec firefox; mode "default"
     bindsym c exec chromium; mode "default"
@@ -318,6 +317,14 @@ bindsym $mod+Shift+Tab focus left
 
 set $Locker i3lock --dpms --inactivity-timeout 10 --color=666666 --ignore-empty-password --show-failed-attempts && sleep 1
 
+set $mode_display (E)xternal display only, (B)uilt-in display only, (2) Both displays
+mode "$mode_display" {
+    bindsym e exec --no-startup-id xrandr --output eDP1 --off --output HDMI1 --primary --mode 3840x2160 --pos 0x0 --scale 0.6 --rotate normal --output VIRTUAL1 --off ; mode "default"
+    bindsym b exec --no-startup-id xrandr --output eDP1 --primary --auto --pos 0x0 --rotate normal --output HDMI1 --off --output VIRTUAL1 --off ; mode "default"
+    bindsym 2 exec --no-startup-id xrandr --output eDP1 --primary --mode 1366x768 --pos 500x1296 --rotate normal --output HDMI1 --mode 3840x2160 --pos 0x0 --scale 0.6 --rotate normal --output VIRTUAL1 --off ; mode "default"
+}
+bindsym $mod+Control+d mode "$mode_display"
+
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
@@ -331,7 +338,6 @@ mode "$mode_system" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-
 bindsym $mod+Control+Escape mode "$mode_system"
 
 
