@@ -52,8 +52,8 @@ bindsym $mod+c exec clipmenu -i -fn "Source Code Pro:size=12" -nb '#404040' -nf 
 #bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that installed.
-#bindsym $mod+e exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+e exec --no-startup-id rofi -show run
+#bindsym $mod+space exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+space exec --no-startup-id rofi -show run
 bindsym $mod+w exec --no-startup-id rofi -show window
 
 # change focus
@@ -97,8 +97,7 @@ bindsym $mod+Shift+F11 fullscreen toggle global
 #bindsym $mod+d layout splith
 bindsym $mod+a layout toggle tabbed splitv splith
 
-bindsym $mod+Shift+space exec xrandr --auto
-bindsym $mod+Shift+u exec xmodmap ~/.Xmodmap
+#bindsym $mod+Shift+u exec xmodmap ~/.Xmodmap
 
 # toggle tiling / floating
 bindsym $mod+Control+t floating toggle
@@ -173,7 +172,7 @@ bindsym $mod+Control+9 move container to workspace $ws9; workspace $ws9
 bindsym $mod+Control+0 move container to workspace $ws10; workspace $ws10
 
 # move application to the other screen
-bindsym $mod+o move container to output down
+#bindsym $mod+o move container to output down
 bindsym $mod+Shift+o move workspace to output down
 
 # reload the configuration file
@@ -225,11 +224,6 @@ bar {
     workspace_buttons no
     modifier $mod+Control
     status_command i3status-rs ~/.config/i3/status.toml
-
-    #font pango:DejaVu Sans Mono 26 #10
-    #font pango:Source Code Pro 26
-    #font -*-unifont-*-*-*-*-*-*-*-*-*-*-iso10646-*
-    #font pango:snap, Tamsyn, WenQuanYi Bitmap Song, FontAwesome, Unifont 14
 
     colors {
        #color class       border  back.   text
