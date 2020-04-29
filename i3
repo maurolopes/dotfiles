@@ -95,7 +95,7 @@ bindsym $mod+Shift+F11 fullscreen toggle global
 #bindsym $mod+a layout tabbed
 #bindsym $mod+s layout stacking
 #bindsym $mod+d layout splith
-bindsym $mod+a layout toggle all
+bindsym $mod+a layout toggle tabbed splitv splith
 
 bindsym $mod+Shift+space exec xrandr --auto
 bindsym $mod+Shift+u exec xmodmap ~/.Xmodmap
