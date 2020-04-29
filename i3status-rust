@@ -2,6 +2,23 @@ theme = "solarized-dark"
 icons = "awesome"
 
 [[block]]
+block = "net"
+device = "wlp2s0"
+ssid = true
+graph_up = false
+graph_down = false
+speed_up = false
+speed_down = false
+ip = false
+interval = 1
+
+[[block]]
+block = "xrandr"
+icons = true
+resolution = true
+interval = 1
+
+[[block]]
 block = "disk_space"
 path = "/"
 alias = "/"
@@ -20,11 +37,6 @@ format_swap = "{SUp}%"
 [[block]]
 block = "cpu"
 interval = 1
-
-[[block]]
-block = "load"
-interval = 1
-format = "{1m}"
 
 [[block]]
 block = "sound"
