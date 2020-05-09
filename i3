@@ -243,7 +243,7 @@ bar {
 }
 
 # Press $mod+x followed by the first letter to launch a program
-set $mode_launcher Launch: [f]irefox [c]hromium [e]macs [w]i-fi [p]cmanfm [o]ctopi [b]luetooth [a]udio
+set $mode_launcher Launch: [f]irefox [c]hromium [e]macs [w]i-fi [p]cmanfm [o]ctopi [b]luetooth [a]udio [s]creenshot
 bindsym $mod+x mode "$mode_launcher"
 mode "$mode_launcher" {
     bindsym f exec firefox; mode "default"
@@ -255,6 +255,7 @@ mode "$mode_launcher" {
     bindsym o exec octopi; mode "default"
     bindsym b exec blueman-manager; mode "default"
     bindsym a exec pavucontrol; mode "default"
+    bindsym s exec gscreenshot; mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
