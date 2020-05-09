@@ -18,6 +18,7 @@
  '(beacon-blink-when-point-moves-horizontally 10)
  '(beacon-blink-when-point-moves-vertically 1)
  '(beacon-mode t)
+ '(bidi-paragraph-direction (quote left-to-right))
  '(blink-cursor-mode t)
  '(ccm-recenter-at-end-of-file t)
  '(ccm-vpos-init (quote (round (* 21 (window-text-height)) 34)))
