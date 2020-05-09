@@ -728,15 +728,15 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 ;; Considering:
 ;; Two-paned dired: http://pragmaticemacs.com/emacs/double-dired-with-sunrise-commander/
 
-;; Good dark color themes: base16-tomorrow-dark, base16-oceanicnext-dark, zenburn, apropospriate-dark
+;; Good dark color themes: base16-tomorrow-dark, base16-oceanicnext-dark, zenburn, apropospriate-dark, gruvbox-dark-medium, tangotango
 ;; Good light color themes: flatui, solarized, faff
 
 (defadvice load-theme (before theme-dont-propagate activate)
   "Ensure only one theme is active at a time."
   (mapc #'disable-theme custom-enabled-themes))
 
-(use-package gruvbox-theme
-  :init (load-theme 'gruvbox-dark-medium))
+(use-package tangotango-theme
+  :init (load-theme 'tangotango))
 
 (put 'scroll-left 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
