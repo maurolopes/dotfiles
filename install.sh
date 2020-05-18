@@ -17,3 +17,6 @@ ln -s "$(realpath xprofile)" ~/.xprofile
 ln -s "$(realpath Xmodmap)" ~/.Xmodmap
 
 ln -s "$(realpath aliases)" ~/.aliases
+
+ln -s "$(realpath zshrc)" ~/.zshrc
+ln -s "$(realpath zshenv)" ~/.zshenv
