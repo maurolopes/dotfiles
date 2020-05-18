@@ -2,6 +2,7 @@
 
 sudo ln -s "$(realpath 11-usb-keyboard.conf)" /etc/X11/xorg.conf.d/11-usb-keyboard.conf
 sudo ln -s "$(realpath 70-synaptics.conf)" /etc/X11/xorg.conf.d/70-synaptics.conf
+mkdir -p ~/.config/dconf && ln -s "$(realpath dconf)" ~/.config/dconf/user
 ln -s "$(realpath dircolors)" ~/.dircolors
 mkdir -p ~/.emacs.d && ln -s "$(realpath .emacs.d/custom.el)" ~/.emacs.d/custom.el
 mkdir -p ~/.emacs.d && ln -s "$(realpath .emacs.d/init.el)" ~/.emacs.d/init.el
