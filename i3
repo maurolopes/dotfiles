@@ -48,11 +48,13 @@ bindsym $mod+Escape kill
 bindsym $mod+c exec clipmenu -i -fn "Source Code Pro:size=12" -nb '#404040' -nf '#aaaaaa' -sb '#222222' -sf '#93a100' -l 30
 
 
-# start dmenu (a program launcher)
+
+# launch any program
 #bindsym $mod+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that installed.
+# launch only programs shipping a .desktop file (requires dmenu)
 #bindsym $mod+space exec --no-startup-id i3-dmenu-desktop
+
+# launch only programs shipping a .desktop file
 bindsym $mod+space exec --no-startup-id rofi -show run
 bindsym $mod+w exec --no-startup-id rofi -show window
 
