@@ -13,3 +13,5 @@ ln -s "$(realpath profile)" ~/.profile
 mkdir -p ~/.lein && ln -s "$(realpath profiles.clj)" ~/.lein/profiles.clj
 ln -s "$(realpath xprofile)" ~/.xprofile
 ln -s "$(realpath Xmodmap)" ~/.Xmodmap
+
+ln -s "$(realpath aliases)" ~/.aliases
