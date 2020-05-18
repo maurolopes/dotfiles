@@ -48,6 +48,8 @@
 (use-package auto-package-update
   :config (auto-package-update-maybe))
 
+(server-start) ; for emacsclient
+
 (use-package ag)
 (use-package ripgrep)
 (use-package default-text-scale)
