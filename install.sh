@@ -9,6 +9,7 @@ mkdir -p ~/.emacs.d && ln -s "$(realpath .emacs.d/init.el)" ~/.emacs.d/init.el
 ln -s "$(realpath gitconfig)" ~/.gitconfig
 ln -s "$(realpath gitignore)" ~/.gitignore
 ln -s "$(realpath i3)" ~/.config/i3/config
+#ln -s "$(realpath i3status)" ~/.config/i3status/config
 ln -s "$(realpath i3status-rust)" ~/.config/i3/status.toml
 ln -s "$(realpath profile)" ~/.profile
 mkdir -p ~/.lein && ln -s "$(realpath profiles.clj)" ~/.lein/profiles.clj
