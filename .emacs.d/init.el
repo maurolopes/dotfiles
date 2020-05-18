@@ -249,7 +249,7 @@
 (bind-key "C-^" (lambda () (interactive) (delete-indentation t))) ; join-line top-down
 
 (bind-key "M-o" 'other-window)
-(bind-key "M-f" 'counsel-ag)
+(bind-key "M-f" 'counsel-rg)
 (bind-key "C-x C-r" 'counsel-recentf)
 (bind-key "C-x C-l" 'counsel-locate)
 (bind-key "C-x C-b" 'ibuffer-jump)
@@ -743,7 +743,7 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 (put 'scroll-left 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
 
-(use-package edit-server
+(use-package edit-server ; edit from web browser
   :ensure t
   :defer nil
   :config (edit-server-start))
