@@ -1,5 +1,4 @@
 abiword
-accountsservice
 ack
 acpi
 adobe-source-code-pro-fonts
@@ -14,7 +13,7 @@ arm-none-eabi-binutils
 arm-none-eabi-gcc
 arm-none-eabi-newlib
 asoundconf
-atool
+audio-recorder
 autoconf
 automake
 avr-binutils
@@ -73,7 +72,6 @@ efibootmgr
 emacs
 enpass-bin
 epdfview
-epiphany
 evince
 exa
 exercism-bin
@@ -200,7 +198,6 @@ noto-fonts
 npm
 ntfs-3g
 ntp
-nvidia-cg-toolkit
 ocaml
 openssh
 openvpn
@@ -210,8 +207,6 @@ pacgraph
 package-query
 pacman
 pacmatic
-pakku
-pamac-aur
 parallel
 patch
 patchage
