@@ -114,6 +114,7 @@
  '(shackle-default-size 0.4)
  '(show-paren-delay 0.0)
  '(show-paren-mode t)
+ '(sp-highlight-pair-overlay nil)
  '(tool-bar-mode nil)
  '(use-package-always-defer t)
  '(use-package-always-ensure t)
