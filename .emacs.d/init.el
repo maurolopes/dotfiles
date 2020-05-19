@@ -604,6 +604,22 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
                                        (yas-minor-mode 1) ; for adding require/use/import statements
                                        (cljr-add-keybindings-with-prefix "C-c C-x"))))
 
+;; Go
+
+(use-package go-mode)
+(use-package go-errcheck)
+(use-package company-go)
+
+(add-hook 'go-mode-hook
+          (lambda ()
+            (set (make-local-variable 'company-backends)
+                 '(company-go))
+            (company-mode)
+            (if (not (string-match "go" compile-command))
+                (set (make-local-variable 'compile-command)
+                     "go build -v && go test -v && go vet"))
+            (flycheck-mode)))
+
 ;; Rust
 
 (use-package rustic
