@@ -24,6 +24,9 @@ SAVEHIST=5000
 setopt incappendhistory
 unsetopt share_history
 
+setopt autocd
+unsetopt PROMPT_SP
+
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/mauro/.zshrc'
 
@@ -56,8 +59,6 @@ antigen bundle z
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 source ~/.aliases
-
-unsetopt PROMPT_SP
 
 source ~/.keybindings.zsh
 
