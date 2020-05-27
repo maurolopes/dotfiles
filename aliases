@@ -1,7 +1,8 @@
 # Arch-specific
 alias large-pkgs="expac -H M '%m\t%n' | sort -hr | head -n"
-alias my-pkgs="pacman -Qeq"
-alias orphan-deps="pacman -Qdt"
+alias my-pkgs='pacman -Qeq'
+alias orphan-deps='pacman -Qdt'
+alias clear-cache='sudo pacman -S --clean --clean --noconfirm && sudo rm -rf ~/.cache/yay/*'
 
 alias o='xdg-open'
 #alias e='emacsclient --create-frame --alternate-editor=""'
