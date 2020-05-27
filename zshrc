@@ -53,7 +53,6 @@ antigen bundle rust
 antigen bundle sudo
 antigen bundle chrissicool/zsh-256color
 #antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle z
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -78,7 +77,9 @@ export PATH="/home/mauro/.local/bin:$PATH"
 #source ~/.antigen/repos/https-COLON--SLASH--SLASH-github.com-SLASH-zsh-users-SLASH-zsh-autosuggestions.git/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-plugins=(fzf-zsh)
+plugins=(fzf fasd rustup)
+
+eval "$(fasd --init auto)"
 
 source /home/mauro/.config/broot/launcher/bash/br
 fpath+=~/.zfunc
