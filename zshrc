@@ -1,6 +1,9 @@
+# History
 HISTFILE=~/.zsh_hist
 HISTSIZE=5000
 SAVEHIST=5000
+setopt incappendhistory
+unsetopt share_history
 
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/mauro/.zshrc'
@@ -35,8 +38,6 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 
 source ~/.aliases
 
-setopt incappendhistory
-unsetopt share_history
 unsetopt PROMPT_SP
 
 source ~/.keybindings.zsh
