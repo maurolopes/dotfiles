@@ -61,6 +61,7 @@ diff-so-fancy
 diffpdf
 diffuse
 diffutils
+discount
 dkms
 docker-compose
 docker-machine
@@ -77,6 +78,7 @@ exa
 exercism-bin
 f2fs-tools
 fakeroot
+fasd
 fd
 feh
 file
@@ -107,14 +109,12 @@ gnome-system-monitor
 gnu-netcat
 gnumeric
 gnuplot
-go-pie
+go
 google-chrome
 gotop-bin
 gparted
 gpick
 gpicview
-graal-bin
-graal-native-image-bin
 grep
 groff
 gron-bin
@@ -189,6 +189,7 @@ mousepad
 mplayer
 mypy
 nano
+native-image-jdk11-bin
 ncdu
 netctl
 networkmanager-openvpn
@@ -228,6 +229,7 @@ pulseaudio-alsa
 pulseaudio-bluetooth
 pulseaudio-ctl
 pygtk
+python-grip
 python-html2text
 python-pip
 python-pylint
@@ -383,6 +385,7 @@ xorg-xvinfo
 xorg-xwd
 xorg-xwininfo
 xorg-xwud
+xournalpp
 xsel
 xterm
 yarn
