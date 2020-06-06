@@ -223,6 +223,13 @@
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
+
+(use-package stripe-buffer              ; Add stripes to a buffer
+;;  :disabled t
+  :ensure t
+  :init (progn (add-hook 'dired-mode-hook 'turn-on-stripe-buffer-mode)
+               (add-hook 'org-mode-hook 'turn-on-stripe-table-mode)))
+
 ;; Git
 
 (use-package magit
