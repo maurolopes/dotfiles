@@ -563,6 +563,9 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 (use-package clojure-mode-extra-font-locking
   :after (clojure-mode))
 
+(use-package clojure-snippets
+  :defer t)
+
 (use-package flycheck-joker
   :init (require 'flycheck-joker))
 
