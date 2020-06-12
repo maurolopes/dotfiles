@@ -160,4 +160,4 @@
  '(default ((t (:height 100 :family "Hack"))))
  '(avy-lead-face ((t (:foreground "orange"))))
  '(avy-lead-face-0 ((t (:foreground "white"))))
- '(line-number-current-line ((t (:inherit line-number :foreground "#edd400")))))
+ '(line-number-current-line ((t (:inherit line-number :foreground "orange")))))
