@@ -146,7 +146,7 @@
  '(version-control t)
  '(vlf-tune-enabled nil)
  '(wakatime-python-bin nil)
- '(which-key-idle-delay 0.1)
+ '(which-key-idle-delay 0.5)
  '(which-key-show-transient-maps t)
  '(which-key-side-window-max-height 0.75)
  '(which-key-sort-order (quote which-key-prefix-then-key-order))
