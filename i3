@@ -400,9 +400,9 @@ bindsym $mod+XF86AudioMute exec --no-startup-id /usr/bin/pulseaudio-ctl mute
 bindsym $mod+Control+XF86AudioMute exec --no-startup-id /usr/bin/pulseaudio-ctl mute
 
 ### Brightness ###
-bindsym XF86MonBrightnessUp              exec --no-startup-id xbacklight -inc 5
-bindsym $mod+XF86MonBrightnessUp         exec --no-startup-id xbacklight -inc 5
-bindsym $mod+Control+XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
-bindsym $mod+XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
-bindsym $mod+Control+XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
+bindsym XF86MonBrightnessUp                exec --no-startup-id xbacklight -inc 5
+bindsym $mod+XF86MonBrightnessUp           exec --no-startup-id xbacklight -inc 1
+bindsym $mod+Control+XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 1
+bindsym XF86MonBrightnessDown              exec --no-startup-id xbacklight -dec 5
+bindsym $mod+XF86MonBrightnessDown         exec --no-startup-id xbacklight -dec 1
+bindsym $mod+Control+XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 1
