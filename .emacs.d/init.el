@@ -788,6 +788,20 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   :init
   (beacon-mode 1))
 
+(use-package all-the-icons
+  :defer nil
+  :config
+  (unless (file-exists-p (expand-file-name "~/.local/share/fonts/all-the-icons.ttf"))
+    (all-the-icons-install-fonts))
+  :init (setq inhibit-compacting-font-caches t))
+
+(use-package all-the-icons-ivy
+  :defer nil
+  :hook ((after-init . all-the-icons-ivy-setup)))
+
+(use-package all-the-icons-dired
+  :ensure t
+  :hook ((dired-mode . all-the-icons-dired-mode)))
 
 (defvar mcl/pair-programming nil)
 (defun mcl/pair-programming-toggle ()
