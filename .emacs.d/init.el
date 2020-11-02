@@ -97,7 +97,6 @@
 (use-package which-key
   :defer nil
   :diminish nil
-  :ensure t
   :init
   (setq which-key-idle-delay 0.5
         which-key-idle-secondary-delay 0.0)
@@ -118,7 +117,6 @@
 
 (use-package ivy
   :delight ivy-mode
-  :ensure t
   :defer nil
   :diminish nil
   :bind
@@ -137,6 +135,7 @@
   (define-key ivy-minibuffer-map (kbd "<C-up>") 'ivy-previous-history-element))
 
 (use-package ivy-hydra
+  :requires (ivy)
   :after (ivy hydra)
   :config (require 'hydra))
 
@@ -157,13 +156,12 @@
   (bind-key "M-Z" 'mcl/zap-up-to-same-char))
 
 (use-package company
-  :ensure t
   :defer nil
   :diminish nil
   :config (global-company-mode))
 
 (use-package company-box
-  :ensure t
+  :requires (company)
   :defer nil
   :after (all-the-icons company)
   :delight (company-box-mode nil company-box)
@@ -214,6 +212,7 @@
   :mode "\\.rest$")
 
 (use-package company-restclient
+  :requires (company)
   :after (company restclient)
   :hook ((restclient-mode . (lambda () (add-to-list 'company-backends 'company-restclient)))))
 
@@ -225,11 +224,11 @@
 
 (use-package amx         ; better M-x interface -- integrates with Ivy
   :diminish "amx"
+  :requires (ivy)
   :config
   (amx-mode t))
 
 (use-package counsel
-  :ensure t
   :diminish ""
   :config (counsel-mode)
   (with-eval-after-load 'helpful
@@ -237,7 +236,6 @@
     (setq counsel-describe-variable-function #'helpful-variable)))
 
 (use-package projectile
-  :ensure t
   :diminish ""
   :bind-keymap* ("C-x p" . projectile-command-map)
   :init (setq projectile-completion-system 'ivy)
@@ -245,13 +243,12 @@
   (projectile-mode +1)
   (use-package counsel-projectile
     :defer nil
-    :ensure t
+    :requires (counsel)
     :config
     (add-to-list 'ivy-initial-inputs-alist '(counsel-projectile-switch-project . ""))
     (counsel-projectile-mode t)))
 
 (use-package helpful
-  :ensure t
   :bind (("C-h a" . helpful-symbol)
          ("C-h f" . helpful-callable)
          ("C-h k" . helpful-key)
@@ -290,8 +287,6 @@
 
 
 (use-package stripe-buffer              ; Add stripes to a buffer
-;;  :disabled t
-  :ensure t
   :init (progn (add-hook 'dired-mode-hook 'turn-on-stripe-buffer-mode)
                (add-hook 'org-mode-hook 'turn-on-stripe-table-mode)))
 
@@ -622,7 +617,6 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
     (smartparens-global-strict-mode 1)))
 
 (use-package smart-jump
-  :ensure t
   :defer nil
   :config (smart-jump-setup-default-registers))
 
@@ -688,17 +682,15 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 ;; Go
 
 (use-package lsp-mode
-  :ensure t
   :commands (lsp lsp-deferred)
   :hook (go-mode . lsp-deferred))
 
 (use-package lsp-ui
-  :ensure t
-  :commands lsp-ui-mode
-  :init
-)
+  :requires (lsp-mode)
+  :commands lsp-ui-mode)
+
 (use-package company-lsp
-  :ensure t
+  :requires (company lsp-mode)
   :commands company-lsp)
 
 ;;Set up before-save hooks to format buffer and add/delete imports.
@@ -711,7 +703,6 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 
 (use-package go-mode
 :defer t
-:ensure t
 :mode ("\\.go\\'" . go-mode)
 :init
   (setq compile-command "echo Building... && go build -v && echo Testing... && go test -v && echo Linter... && golint")
@@ -738,6 +729,7 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 (use-package toml-mode)
 
 (use-package racer
+  :requires (company)
   :init (progn
           (add-hook 'racer-mode-hook #'company-mode)
           (add-hook 'racer-mode-hook #'eldoc-mode)))
@@ -771,7 +763,7 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   :hook python-mode-hook)
 
 (use-package ein
-  :ensure t
+  :requires (company)
   :config
   ; (advice-add 'request--netscape-cookie-parse :around #'fix-request-netscape-cookie-parse)
   (setq ein:worksheet-enable-undo 'yes)
@@ -781,6 +773,7 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
     (setq ein:default-url-or-port "https://shell.drakirus.com")))
 
 (use-package elpy
+  :requires (company)
   :after (company python)
   :init (elpy-enable)
   :config
@@ -829,7 +822,6 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   (bind-key (kbd "C-;") 'hydra-string-inflection/body))
 
 (use-package imenu-list
-  :ensure t
   :bind (("C-'" . imenu-list-smart-toggle)))
 
 (defhydra hydra-goto (:color blue :columns 3)
@@ -845,7 +837,6 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 (bind-key "M-g" 'hydra-goto/body)
 
 (use-package dired-sidebar
-  :ensure t
   :bind ("<f5>" . dired-sidebar-toggle-sidebar)
   :commands (dired-sidebar-toggle-sidebar))
 (require 'dired-x)
@@ -913,12 +904,10 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 (put 'dired-find-alternate-file 'disabled nil)
 
 (use-package edit-server                ; edit from web browser
-  :ensure t
   :defer nil
   :config (edit-server-start))
 
 (use-package beacon
-  :ensure t
   :diminish beacon-mode
   :init
   (beacon-mode 1))
@@ -931,11 +920,12 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   :init (setq inhibit-compacting-font-caches t))
 
 (use-package all-the-icons-ivy
+  :requires (ivy)
   :defer nil
   :hook ((after-init . all-the-icons-ivy-setup)))
 
 (use-package all-the-icons-dired
-  :ensure t
+  :requires (all-the-icons)
   :hook ((dired-mode . all-the-icons-dired-mode)))
 
 (defvar mcl/pair-programming nil)
