@@ -782,7 +782,12 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   :defer nil
   :config (edit-server-start))
 
-(use-package beacon)
+(use-package beacon
+  :ensure t
+  :diminish beacon-mode
+  :init
+  (beacon-mode 1))
+
 
 (defvar mcl/pair-programming nil)
 (defun mcl/pair-programming-toggle ()
