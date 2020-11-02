@@ -14,6 +14,10 @@
 (straight-use-package 'use-package)
 (setq straight-use-package-by-default t)
 
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+
 ;; Startup time
 ;; (emacs-init-time) ; 0.8 s
 ;; https://github.com/CSRaghunandan/.emacs.d/blob/master/init.el#L7
@@ -38,17 +42,6 @@
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
-
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(unless (bound-and-true-p package--initialized)
-  (setq package-enable-at-startup nil)
-  (package-initialize))
-
-(unless package-archive-contents
-  (package-refresh-contents)
-  (package-install 'use-package))
-(require 'use-package)
 
 (use-package paradox)
 
