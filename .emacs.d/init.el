@@ -55,9 +55,6 @@
     ;; https://github.com/abo-abo/swiper/issues/844
     (exec-path-from-shell-initialize)))
 
-(use-package auto-package-update
-  :config (auto-package-update-maybe))
-
 (server-start) ; for emacsclient
 
 (use-package ag)
