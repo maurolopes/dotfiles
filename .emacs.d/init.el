@@ -127,11 +127,6 @@
   (define-key ivy-minibuffer-map (kbd "<C-down>") 'ivy-next-history-element)
   (define-key ivy-minibuffer-map (kbd "<C-up>") 'ivy-previous-history-element))
 
-(use-package ivy-rich
-  :ensure t
-  :defer nil
-  :config (ivy-rich-mode 1))
-
 (use-package ivy-hydra
   :after (ivy hydra)
   :config (require 'hydra))
