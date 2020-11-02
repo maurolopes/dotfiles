@@ -178,9 +178,12 @@
   (amx-mode t))
 
 (use-package counsel
-  :defer nil
+  :ensure t
   :diminish ""
-  :config (counsel-mode))
+  :config (counsel-mode)
+  (with-eval-after-load 'helpful
+    (setq counsel-describe-function-function #'helpful-callable)
+    (setq counsel-describe-variable-function #'helpful-variable)))
 
 (use-package projectile
   :defer nil
@@ -189,9 +192,12 @@
   :config (projectile-mode +1)
   :bind-keymap ("C-x p" . projectile-command-map))
 
-(use-package counsel-projectile
-  :after (counsel projectile)
-  :config (counsel-projectile-mode))
+(use-package helpful
+  :ensure t
+  :bind (("C-h a" . helpful-symbol)
+         ("C-h f" . helpful-callable)
+         ("C-h k" . helpful-key)
+         ("C-h v" . helpful-variable)))
 
 (use-package swiper
   :bind ("C-f" . swiper))
@@ -212,6 +218,7 @@
   ("s" mc/sort-regions "sort regions")
   ("m" mc/mark-more-like-this-extended "mark more")
   ("q" nil))
+
 (use-package multiple-cursors
   ;; alternative: https://github.com/victorhge/iedit
   ;; TODO: fix some functions
