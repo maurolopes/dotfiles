@@ -134,7 +134,7 @@
   :config (require 'hydra))
 
 (use-package avy
-  :bind ("C-l" . avy-goto-word-1)) ; avy-goto-subword-1 sometimes hangs
+  :bind ("C-n" . avy-goto-word-1)) ; avy-goto-subword-1 sometimes hangs
 
 (let ((mcl/zap-up-to-char-last-char-arg ?a))
   (defun mcl/zap-up-to-char (arg char)
