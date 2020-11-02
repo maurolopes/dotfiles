@@ -1,24 +1,40 @@
 ;; Startup time
 ;; (emacs-init-time) ; 0.8 s
-;; https://github.com/CSRaghunandan/.emacs.d/blob/master/init.el#L7
-
-;; Every file opened and loaded by Emacs will run through this list to check for
-;; a proper handler for the file, but during startup, it won’t need any of them.
-(defvar file-name-handler-alist-old file-name-handler-alist)
 
 ;; https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_steps_to_speed_up_emacs_start/
+(defvar file-name-handler-alist-old file-name-handler-alist)
 (setq gc-cons-threshold most-positive-fixnum
       file-name-handler-alist nil)
 
-(defun reset-gc-threshold ()
-  "Set threshold of garbage collector to a better permanent value and invoke garbage colletion now."
-  (setq gc-cons-threshold 50000000 ; 50MB
-        file-name-handler-alist file-name-handler-alist-old)
-  (garbage-collect))
+(defvar better-gc-cons-threshold 67108864) ; 64MB
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq gc-cons-threshold better-gc-cons-threshold
+                  file-name-handler-alist file-name-handler-alist-old)
+            (makunbound 'file-name-handler-alist-old)
+            (garbage-collect)))
 
-(add-hook 'emacs-startup-hook #'reset-gc-threshold)
+(setq site-run-file nil)
+
+(unless (and (display-graphic-p) (eq system-type 'darwin))
+  (push '(menu-bar-lines . 0) default-frame-alist))
+(push '(tool-bar-lines . 0) default-frame-alist)
+(push '(vertical-scroll-bars) default-frame-alist)
 
 ;; End of Startup time
+
+;; Avoid garbage collection when using minibuffer
+(defun gc-minibuffer-setup-hook ()
+  (setq gc-cons-threshold (* better-gc-cons-threshold 2)))
+
+(defun gc-minibuffer-exit-hook ()
+  (garbage-collect)
+  (setq gc-cons-threshold better-gc-cons-threshold))
+
+(add-hook 'minibuffer-setup-hook #'gc-minibuffer-setup-hook)
+(add-hook 'minibuffer-exit-hook #'gc-minibuffer-exit-hook)
+
+;; Straight package manager
 
 (defvar bootstrap-version)
 (let ((bootstrap-file
