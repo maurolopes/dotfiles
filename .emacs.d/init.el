@@ -162,43 +162,7 @@
   :defer nil
   :after (all-the-icons company)
   :delight (company-box-mode nil company-box)
-  :hook (company-mode . company-box-mode)
-  ;; :config
-  ;; (setq
-  ;;  company-box-icons-all-the-icons
-  ;;  `((Unknown       . ,(all-the-icons-material "find_in_page"             :height 0.8 :face 'all-the-icons-purple))
-  ;;    (Text          . ,(all-the-icons-material "text_fields"              :height 0.8 :face 'all-the-icons-green))
-  ;;    (Method        . ,(all-the-icons-material "functions"                :height 0.8 :face 'all-the-icons-yellow))
-  ;;    (Function      . ,(all-the-icons-material "functions"                :height 0.8 :face 'all-the-icons-yellow))
-  ;;    (Constructor   . ,(all-the-icons-material "functions"                :height 0.8 :face 'all-the-icons-yellow))
-  ;;    (Field         . ,(all-the-icons-material "functions"                :height 0.8 :face 'all-the-icons-yellow))
-  ;;    (Variable      . ,(all-the-icons-material "adjust"                   :height 0.8 :face 'all-the-icons-blue))
-  ;;    (Class         . ,(all-the-icons-material "class"                    :height 0.8 :face 'all-the-icons-cyan))
-  ;;    (Interface     . ,(all-the-icons-material "settings_input_component" :height 0.8 :face 'all-the-icons-cyan))
-  ;;    (Module        . ,(all-the-icons-material "view_module"              :height 0.8 :face 'all-the-icons-cyan))
-  ;;    (Property      . ,(all-the-icons-material "settings"                 :height 0.8 :face 'all-the-icons-lorange))
-  ;;    (Unit          . ,(all-the-icons-material "straighten"               :height 0.8 :face 'all-the-icons-red))
-  ;;    (Value         . ,(all-the-icons-material "filter_1"                 :height 0.8 :face 'all-the-icons-red))
-  ;;    (Enum          . ,(all-the-icons-material "plus_one"                 :height 0.8 :face 'all-the-icons-lorange))
-  ;;    (Keyword       . ,(all-the-icons-material "filter_center_focus"      :height 0.8 :face 'all-the-icons-lgreen))
-  ;;    (Snippet       . ,(all-the-icons-material "short_text"               :height 0.8 :face 'all-the-icons-lblue))
-  ;;    (Color         . ,(all-the-icons-material "color_lens"               :height 0.8 :face 'all-the-icons-green))
-  ;;    (File          . ,(all-the-icons-material "insert_drive_file"        :height 0.8 :face 'all-the-icons-green))
-  ;;    (Reference     . ,(all-the-icons-material "collections_bookmark"     :height 0.8 :face 'all-the-icons-silver))
-  ;;    (Folder        . ,(all-the-icons-material "folder"                   :height 0.8 :face 'all-the-icons-green))
-  ;;    (EnumMember    . ,(all-the-icons-material "people"                   :height 0.8 :face 'all-the-icons-lorange))
-  ;;    (Constant      . ,(all-the-icons-material "pause_circle_filled"      :height 0.8 :face 'all-the-icons-blue))
-  ;;    (Struct        . ,(all-the-icons-material "streetview"               :height 0.8 :face 'all-the-icons-blue))
-  ;;    (Event         . ,(all-the-icons-material "event"                    :height 0.8 :face 'all-the-icons-yellow))
-  ;;    (Operator      . ,(all-the-icons-material "control_point"            :height 0.8 :face 'all-the-icons-red))
-  ;;    (TypeParameter . ,(all-the-icons-material "class"                    :height 0.8 :face 'all-the-icons-red))
-  ;;    ;; (Template   . ,(company-box-icons-image "Template.png"))))
-  ;;    (Yasnippet     . ,(all-the-icons-material "short_text"               :height 0.8 :face 'all-the-icons-green))
-  ;;    (ElispFunction . ,(all-the-icons-material "functions"                :height 0.8 :face 'all-the-icons-red))
-  ;;    (ElispVariable . ,(all-the-icons-material "check_circle"             :height 0.8 :face 'all-the-icons-blue))
-  ;;    (ElispFeature  . ,(all-the-icons-material "stars"                    :height 0.8 :face 'all-the-icons-orange))
-  ;;    (ElispFace     . ,(all-the-icons-material "format_paint"             :height 0.8 :face 'all-the-icons-pink))))
-  )
+  :hook (company-mode . company-box-mode))
 
 (use-package column-enforce-mode
   :diminish nil
@@ -869,33 +833,6 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
-
-;; (use-package tangotango-theme
-;;   :init (load-theme 'tangotango)
-;;   :config
-;;   (custom-theme-set-faces
-;;    'tangotango
-
-;;    '(company-preview
-;;      ((t (:inherit escape-glyph))))
-;;    '(company-preview-common
-;;      ((t (:inherit escape-glyph))))
-;;    '(company-tooltip
-;;      ((t (:inherit company-preview))))
-;;    '(company-tooltip-selection
-;;      ((t (:inherit highlight))))
-
-;;    '(company-tooltip-common
-;;      ((((type x)) (:inherit company-tooltip ))
-;;       (t (:inherit company-tooltip))))
-;;    '(company-tooltip-common-selection
-;;      ((((type x)) (:inherit company-tooltip-selection))
-;;       (t (:inherit company-tooltip-selection))))
-
-;;    '(company-tooltip-annotation
-;;      ((t (:inherit company-tooltip))))
-;;    '(company-tooltip-annotation-selection
-;;      ((t (:inherit company-tooltip-selection))))))
 
 (put 'scroll-left 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
