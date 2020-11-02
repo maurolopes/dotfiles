@@ -56,6 +56,16 @@
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 
+
+(straight-use-package
+ '(gcmh
+   :type git
+   :host github
+   :repo "emacsmirror/gcmh"))
+(require 'gcmh)
+(gcmh-mode 1)
+
+;; TODO: Remove custom.el eventually
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
