@@ -24,10 +24,10 @@
  '(ccm-vpos-init (quote (round (* 21 (window-text-height)) 34)))
  '(cider-jdk-src-paths
    (quote
-    ("~/.java/openjv-8-src/" "~/src/opensource/clojure/src/jvm")))
+    ("~/.java/openjv-8-src/" "~/src/opensource/clojure/src/jvm")) t)
  '(cider-lein-command "~/bin/lein")
  '(cider-ns-save-files-on-refresh t)
- '(cider-prompt-for-symbol nil)
+ '(cider-prompt-for-symbol nil t)
  '(cider-repl-display-help-banner nil)
  '(cider-repl-pretty-print-width 250 t)
  '(cider-repl-use-pretty-printing t)
@@ -38,25 +38,31 @@
  '(clojure-defun-indents (quote (e2e fact)))
  '(column-enforce-column 128)
  '(column-number-mode t)
+ '(company-box-doc-delay 0)
  '(company-dabbrev-downcase nil)
  '(company-dabbrev-ignore-case nil)
- '(company-idle-delay 0.15)
- '(company-minimum-prefix-length 2)
+ '(company-idle-delay 0.4)
+ '(company-minimum-prefix-length 1)
  '(company-quickhelp-color-background "#4F4F4F")
  '(company-quickhelp-color-foreground "#DCDCCC")
  '(company-require-match nil)
  '(company-tooltip-align-annotations t)
  '(company-tooltip-minimum-width 15)
  '(compilation-ask-about-save nil)
+ '(compilation-message-face (quote default))
  '(compilation-read-command nil)
  '(compilation-scroll-output (quote first-error))
  '(compilation-window-height 10)
  '(compile-command "make")
  '(counsel-ag-base-command "ag --nocolor --nogroup --hidden %s")
  '(create-lockfiles nil)
+ '(cua-global-mark-cursor-color "#11948b")
+ '(cua-normal-cursor-color "#596e76")
+ '(cua-overwrite-cursor-color "#a67c00")
+ '(cua-read-only-cursor-color "#778c00")
  '(custom-safe-themes
    (quote
-    ("713f898dd8c881c139b62cf05b7ac476d05735825d49006255c0a31f9a4f46ab" "aded61687237d1dff6325edb492bde536f40b048eab7246c61d5c6643c696b7f" "2b9dc43b786e36f68a9fd4b36dd050509a0e32fe3b0a803310661edb7402b8b6" "585942bb24cab2d4b2f74977ac3ba6ddbd888e3776b9d2f993c5704aa8bb4739" "8f97d5ec8a774485296e366fdde6ff5589cf9e319a584b845b6f7fa788c9fa9a" "a22f40b63f9bc0a69ebc8ba4fbc6b452a4e3f84b80590ba0a92b4ff599e53ad0" "c82d24bfba431e8104219bfd8e90d47f1ad6b80a504a7900cbee002a8f04392f" "05a4b82c39107308b5c3720fd0c9792c2076e1ff3ebb6670c6f1c98d44227689" "54f2d1fcc9bcadedd50398697618f7c34aceb9966a6cbaa99829eb64c0c1f3ca" "04232a0bfc50eac64c12471607090ecac9d7fd2d79e388f8543d1c5439ed81f5" "d057f0430ba54f813a5d60c1d18f28cf97d271fd35a36be478e20924ea9451bd" "ec5f697561eaf87b1d3b087dd28e61a2fc9860e4c862ea8e6b0b77bd4967d0ba" default)))
+    ("e074be1c799b509f52870ee596a5977b519f6d269455b84ed998666cf6fc802a" "7a994c16aa550678846e82edc8c9d6a7d39cc6564baaaacc305a3fdc0bd8725f" "e1ef2d5b8091f4953fe17b4ca3dd143d476c106e221d92ded38614266cea3c8b" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "285d1bf306091644fb49993341e0ad8bafe57130d9981b680c1dbd974475c5c7" "a11808699b77d62f5d10dd73cd474af3057d84cceac8f0301b82ad3e4fb0433e" "cf9f20cab61999609e47b969f6d7a89c148e16f94ae3f2f127fecfc27dc878d3" "713f898dd8c881c139b62cf05b7ac476d05735825d49006255c0a31f9a4f46ab" "aded61687237d1dff6325edb492bde536f40b048eab7246c61d5c6643c696b7f" "2b9dc43b786e36f68a9fd4b36dd050509a0e32fe3b0a803310661edb7402b8b6" "585942bb24cab2d4b2f74977ac3ba6ddbd888e3776b9d2f993c5704aa8bb4739" "8f97d5ec8a774485296e366fdde6ff5589cf9e319a584b845b6f7fa788c9fa9a" "a22f40b63f9bc0a69ebc8ba4fbc6b452a4e3f84b80590ba0a92b4ff599e53ad0" "c82d24bfba431e8104219bfd8e90d47f1ad6b80a504a7900cbee002a8f04392f" "05a4b82c39107308b5c3720fd0c9792c2076e1ff3ebb6670c6f1c98d44227689" "54f2d1fcc9bcadedd50398697618f7c34aceb9966a6cbaa99829eb64c0c1f3ca" "04232a0bfc50eac64c12471607090ecac9d7fd2d79e388f8543d1c5439ed81f5" "d057f0430ba54f813a5d60c1d18f28cf97d271fd35a36be478e20924ea9451bd" "ec5f697561eaf87b1d3b087dd28e61a2fc9860e4c862ea8e6b0b77bd4967d0ba" default)))
  '(delete-old-versions t)
  '(dired-dwim-target t)
  '(dired-listing-switches "-lah")
@@ -72,10 +78,33 @@
  '(exec-path-from-shell-variables (quote ("PATH" "MANPATH" "NIX_PATH")))
  '(expand-region-contract-fast-key "DEL")
  '(fci-rule-color "#383838")
+ '(fill-column 80)
  '(git-gutter-fr:side (quote right-fringe))
  '(global-display-line-numbers-mode t)
  '(global-font-lock-mode t)
  '(global-subword-mode t)
+ '(highlight-changes-colors (quote ("#c42475" "#5e65b6")))
+ '(highlight-symbol-colors
+   (quote
+    ("#ec90da49b1e9" "#ccb4e1bdd0ac" "#fb9eca14b38f" "#d89bd3eadcf9" "#de29dee7b293" "#f675cca1ae79" "#d05fdab7e079")))
+ '(highlight-symbol-foreground-color "#5d737a")
+ '(highlight-tail-colors
+   (quote
+    (("#f4eedb" . 0)
+     ("#a8b84b" . 20)
+     ("#66c1b3" . 30)
+     ("#6fa5e7" . 50)
+     ("#d6a549" . 60)
+     ("#ed6e3e" . 70)
+     ("#f46495" . 85)
+     ("#f4eedb" . 100))))
+ '(hl-bg-colors
+   (quote
+    ("#d6a549" "#ed6e3e" "#ff6243" "#f46495" "#837bdf" "#6fa5e7" "#66c1b3" "#a8b84b")))
+ '(hl-fg-colors
+   (quote
+    ("#fffce9" "#fffce9" "#fffce9" "#fffce9" "#fffce9" "#fffce9" "#fffce9" "#fffce9")))
+ '(hl-paren-colors (quote ("#11948b" "#a67c00" "#007ec4" "#5e65b6" "#778c00")))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
@@ -84,9 +113,17 @@
  '(ivy-rich-path-style (quote abbrev))
  '(ivy-use-virtual-buffers t)
  '(ivy-virtual-abbreviate (quote full))
+ '(jdee-db-active-breakpoint-face-colors (cons "#f2f2f2" "#4271ae"))
+ '(jdee-db-requested-breakpoint-face-colors (cons "#f2f2f2" "#718c00"))
+ '(jdee-db-spec-breakpoint-face-colors (cons "#f2f2f2" "#a5a4a5"))
  '(js-indent-level 2)
  '(kept-new-versions 6)
  '(load-prefer-newer t)
+ '(lsp-ui-doc-border "#5d737a")
+ '(lsp-ui-doc-include-signature t)
+ '(lsp-ui-doc-position (quote bottom))
+ '(lsp-ui-peek-enable nil)
+ '(lsp-ui-sideline-enable nil)
  '(maximum-scroll-margin 0.5)
  '(mc/always-run-for-all t)
  '(menu-bar-mode nil)
@@ -94,34 +131,43 @@
  '(nrepl-message-colors
    (quote
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
+ '(objed-cursor-color "#c82829")
  '(org-timer-default-timer "25")
  '(package-selected-packages
    (quote
-    (stripe-buffer clojure-snippets company-go go-errcheck go-mode lsp-mode tangotango-theme ivy-rich paradox edit-server beacon dired-sidebar gruvbox-theme py-autopep8 elpy ein imenu-anywhere rotate json-mode exec-path-from-shell ripgrep anti-zenburn-theme zenburn-theme amx ws-butler feature-mode nix-drv-mode typescript-mode string-inflection default-text-scale magit-todos eglot rustic clojure-mode-extra-font-locking js2-mode prettify-symbols-mode prettify-symbols prog-mode column-enforce-mode eyebrowse company-restclient restclient no-littering which-key volatile-highlights vlf use-package undo-tree toml-mode smex smartparens smart-jump rainbow-mode rainbow-delimiters racer nix-mode mwim magit keyfreq ivy-hydra git-gutter-fringe flycheck-rust flycheck-joker expand-region diminish counsel-projectile clj-refactor cider-eval-sexp-fu centered-cursor-mode cargo avy auto-package-update ag)))
+    (doom-themes solarized-theme flucui-themes stripe-buffer clojure-snippets company-go go-errcheck go-mode lsp-mode tangotango-theme ivy-rich paradox edit-server beacon dired-sidebar gruvbox-theme py-autopep8 elpy ein imenu-anywhere rotate json-mode exec-path-from-shell ripgrep anti-zenburn-theme zenburn-theme amx ws-butler feature-mode nix-drv-mode typescript-mode string-inflection default-text-scale magit-todos eglot rustic clojure-mode-extra-font-locking js2-mode prettify-symbols-mode prettify-symbols prog-mode column-enforce-mode eyebrowse company-restclient restclient no-littering which-key volatile-highlights vlf use-package undo-tree toml-mode smex smartparens smart-jump rainbow-mode rainbow-delimiters racer nix-mode mwim magit keyfreq ivy-hydra git-gutter-fringe flycheck-rust flycheck-joker expand-region diminish counsel-projectile clj-refactor cider-eval-sexp-fu centered-cursor-mode cargo avy auto-package-update ag)))
  '(paradox-column-width-package 40)
  '(paradox-column-width-star 5)
  '(paradox-column-width-version 13)
  '(paradox-execute-asynchronously t)
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
+ '(pos-tip-background-color "#f4eedb")
+ '(pos-tip-foreground-color "#5d737a")
  '(python-shell-interpreter "ipython3")
  '(recentf-auto-cleanup (quote never))
  '(recentf-max-menu-items 20)
  '(recentf-max-saved-items 500)
  '(ring-bell-function (quote ignore))
+ '(rustic-ansi-faces
+   ["#ffffff" "#c82829" "#718c00" "#eab700" "#3e999f" "#c9b4cf" "#8abeb7" "#4d4d4c"])
  '(save-interprogram-paste-before-kill t)
  '(scroll-margin 99999)
  '(scroll-preserve-screen-position t)
  '(shackle-default-size 0.4)
  '(show-paren-delay 0.0)
  '(show-paren-mode t)
+ '(smartrep-mode-line-active-bg (solarized-color-blend "#778c00" "#f4eedb" 0.2))
  '(sp-highlight-pair-overlay nil)
+ '(term-default-bg-color "#fffce9")
+ '(term-default-fg-color "#596e76")
  '(tool-bar-mode nil)
  '(use-package-always-defer t)
  '(use-package-always-ensure t)
  '(use-package-minimum-reported-time 0)
  '(use-package-verbose t)
  '(vc-annotate-background "#2B2B2B")
+ '(vc-annotate-background-mode nil)
  '(vc-annotate-color-map
    (quote
     ((20 . "#BC8383")
@@ -146,11 +192,18 @@
  '(version-control t)
  '(vlf-tune-enabled nil)
  '(wakatime-python-bin nil)
+ '(weechat-color-list
+   (quote
+    (unspecified "#fffce9" "#f4eedb" "#990001" "#cc1f24" "#4f6600" "#778c00" "#785700" "#a67c00" "#005797" "#007ec4" "#93004d" "#c42475" "#006d68" "#11948b" "#596e76" "#88999b")))
  '(which-key-idle-delay 0.5)
  '(which-key-show-transient-maps t)
  '(which-key-side-window-max-height 0.75)
  '(which-key-sort-order (quote which-key-prefix-then-key-order))
- '(winner-mode t))
+ '(winner-mode t)
+ '(xterm-color-names
+   ["#f4eedb" "#cc1f24" "#778c00" "#a67c00" "#007ec4" "#c42475" "#11948b" "#002b37"])
+ '(xterm-color-names-bright
+   ["#fffce9" "#bb3e06" "#98a6a6" "#88999b" "#596e76" "#5e65b6" "#5d737a" "#00212b"]))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -158,6 +211,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:height 100 :family "Hack"))))
- '(avy-lead-face ((t (:foreground "orange"))))
- '(avy-lead-face-0 ((t (:foreground "white"))))
+ '(company-scrollbar-bg ((t (:background "#46084f2a4f2a"))))
+ '(company-scrollbar-fg ((t (:background "#3a0441954195"))))
  '(line-number-current-line ((t (:inherit line-number :foreground "orange")))))

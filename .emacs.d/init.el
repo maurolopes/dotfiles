@@ -108,7 +108,9 @@
   :init (global-undo-tree-mode))
 
 (use-package ivy
-  :defer 0.1
+  :delight ivy-mode
+  :ensure t
+  :defer nil
   :diminish nil
   :bind
   ([remap switch-to-buffer] . counsel-switch-buffer)
@@ -121,6 +123,7 @@
       :config (ivy-historian-mode t)))
   (ivy-mode +1)
   :config
+  (ivy-mode +1)
   (define-key ivy-minibuffer-map (kbd "<C-down>") 'ivy-next-history-element)
   (define-key ivy-minibuffer-map (kbd "<C-up>") 'ivy-previous-history-element))
 
@@ -150,9 +153,53 @@
   (bind-key "M-Z" 'mcl/zap-up-to-same-char))
 
 (use-package company
+  :ensure t
   :defer nil
   :diminish nil
   :config (global-company-mode))
+
+(use-package company-box
+  :ensure t
+  :defer nil
+  :after (all-the-icons company)
+  :delight (company-box-mode nil company-box)
+  :hook (company-mode . company-box-mode)
+  ;; :config
+  ;; (setq
+  ;;  company-box-icons-all-the-icons
+  ;;  `((Unknown       . ,(all-the-icons-material "find_in_page"             :height 0.8 :face 'all-the-icons-purple))
+  ;;    (Text          . ,(all-the-icons-material "text_fields"              :height 0.8 :face 'all-the-icons-green))
+  ;;    (Method        . ,(all-the-icons-material "functions"                :height 0.8 :face 'all-the-icons-yellow))
+  ;;    (Function      . ,(all-the-icons-material "functions"                :height 0.8 :face 'all-the-icons-yellow))
+  ;;    (Constructor   . ,(all-the-icons-material "functions"                :height 0.8 :face 'all-the-icons-yellow))
+  ;;    (Field         . ,(all-the-icons-material "functions"                :height 0.8 :face 'all-the-icons-yellow))
+  ;;    (Variable      . ,(all-the-icons-material "adjust"                   :height 0.8 :face 'all-the-icons-blue))
+  ;;    (Class         . ,(all-the-icons-material "class"                    :height 0.8 :face 'all-the-icons-cyan))
+  ;;    (Interface     . ,(all-the-icons-material "settings_input_component" :height 0.8 :face 'all-the-icons-cyan))
+  ;;    (Module        . ,(all-the-icons-material "view_module"              :height 0.8 :face 'all-the-icons-cyan))
+  ;;    (Property      . ,(all-the-icons-material "settings"                 :height 0.8 :face 'all-the-icons-lorange))
+  ;;    (Unit          . ,(all-the-icons-material "straighten"               :height 0.8 :face 'all-the-icons-red))
+  ;;    (Value         . ,(all-the-icons-material "filter_1"                 :height 0.8 :face 'all-the-icons-red))
+  ;;    (Enum          . ,(all-the-icons-material "plus_one"                 :height 0.8 :face 'all-the-icons-lorange))
+  ;;    (Keyword       . ,(all-the-icons-material "filter_center_focus"      :height 0.8 :face 'all-the-icons-lgreen))
+  ;;    (Snippet       . ,(all-the-icons-material "short_text"               :height 0.8 :face 'all-the-icons-lblue))
+  ;;    (Color         . ,(all-the-icons-material "color_lens"               :height 0.8 :face 'all-the-icons-green))
+  ;;    (File          . ,(all-the-icons-material "insert_drive_file"        :height 0.8 :face 'all-the-icons-green))
+  ;;    (Reference     . ,(all-the-icons-material "collections_bookmark"     :height 0.8 :face 'all-the-icons-silver))
+  ;;    (Folder        . ,(all-the-icons-material "folder"                   :height 0.8 :face 'all-the-icons-green))
+  ;;    (EnumMember    . ,(all-the-icons-material "people"                   :height 0.8 :face 'all-the-icons-lorange))
+  ;;    (Constant      . ,(all-the-icons-material "pause_circle_filled"      :height 0.8 :face 'all-the-icons-blue))
+  ;;    (Struct        . ,(all-the-icons-material "streetview"               :height 0.8 :face 'all-the-icons-blue))
+  ;;    (Event         . ,(all-the-icons-material "event"                    :height 0.8 :face 'all-the-icons-yellow))
+  ;;    (Operator      . ,(all-the-icons-material "control_point"            :height 0.8 :face 'all-the-icons-red))
+  ;;    (TypeParameter . ,(all-the-icons-material "class"                    :height 0.8 :face 'all-the-icons-red))
+  ;;    ;; (Template   . ,(company-box-icons-image "Template.png"))))
+  ;;    (Yasnippet     . ,(all-the-icons-material "short_text"               :height 0.8 :face 'all-the-icons-green))
+  ;;    (ElispFunction . ,(all-the-icons-material "functions"                :height 0.8 :face 'all-the-icons-red))
+  ;;    (ElispVariable . ,(all-the-icons-material "check_circle"             :height 0.8 :face 'all-the-icons-blue))
+  ;;    (ElispFeature  . ,(all-the-icons-material "stars"                    :height 0.8 :face 'all-the-icons-orange))
+  ;;    (ElispFace     . ,(all-the-icons-material "format_paint"             :height 0.8 :face 'all-the-icons-pink))))
+  )
 
 (use-package column-enforce-mode
   :diminish nil
@@ -186,11 +233,18 @@
     (setq counsel-describe-variable-function #'helpful-variable)))
 
 (use-package projectile
-  :defer nil
+  :ensure t
   :diminish ""
+  :bind-keymap* ("C-x p" . projectile-command-map)
   :init (setq projectile-completion-system 'ivy)
-  :config (projectile-mode +1)
-  :bind-keymap ("C-x p" . projectile-command-map))
+  :config
+  (projectile-mode +1)
+  (use-package counsel-projectile
+    :defer nil
+    :ensure t
+    :config
+    (add-to-list 'ivy-initial-inputs-alist '(counsel-projectile-switch-project . ""))
+    (counsel-projectile-mode t)))
 
 (use-package helpful
   :ensure t
@@ -264,7 +318,12 @@
 (bind-key "C-^" (lambda () (interactive) (delete-indentation t))) ; join-line top-down
 
 (bind-key "M-o" 'other-window)
-(bind-key "M-f" 'counsel-rg)
+
+;; Use ag until there is a fix for these:
+;; https://github.com/abo-abo/swiper/issues/2339
+;; https://github.com/hlissner/doom-emacs/issues/3038
+(bind-key "M-f" 'counsel-ag)
+
 (bind-key "C-x C-r" 'counsel-recentf)
 (bind-key "C-x C-l" 'counsel-locate)
 (bind-key "C-x C-b" 'ibuffer-jump)
@@ -551,6 +610,7 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   :defer nil
   :diminish "{}"
   :bind (("C-M-1" . #'multiple-cursors-hydra/body)
+         ("C-)" . #'sp-slurp-hybrid-sexp)
          ("C-M-S-c" . #'sp-convolute-sexp))
   :config
   (progn
@@ -623,19 +683,49 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 
 ;; Go
 
-(use-package go-mode)
-(use-package go-errcheck)
-(use-package company-go)
+(use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :hook (go-mode . lsp-deferred))
 
-(add-hook 'go-mode-hook
-          (lambda ()
-            (set (make-local-variable 'company-backends)
-                 '(company-go))
-            (company-mode)
-            (if (not (string-match "go" compile-command))
-                (set (make-local-variable 'compile-command)
-                     "go build -v && go test -v && go vet"))
-            (flycheck-mode)))
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode
+  :init
+)
+(use-package company-lsp
+  :ensure t
+  :commands company-lsp)
+
+;;Set up before-save hooks to format buffer and add/delete imports.
+;;Make sure you don't have other gofmt/goimports hooks enabled.
+
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
+(use-package go-mode
+:defer t
+:ensure t
+:mode ("\\.go\\'" . go-mode)
+:init
+  (setq compile-command "echo Building... && go build -v && echo Testing... && go test -v && echo Linter... && golint")
+  (setq compilation-read-command nil)
+:bind (("M-," . compile)
+       ("M-." . godef-jump)))
+
+;; (use-package go-errcheck)
+
+;; (add-hook 'go-mode-hook
+;;           (lambda ()
+;;             (set (make-local-variable 'company-backends)
+;;                  '(company-go))
+;;             (company-mode)
+;;             (if (not (string-match "go" compile-command))
+;;                 (set (make-local-variable 'compile-command)
+;;                      "go build -v && go test -v && go vet"))
+;;             (flycheck-mode)))
 
 ;; Rust
 
