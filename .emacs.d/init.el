@@ -69,6 +69,16 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
+;; Make some buffers immortal
+(defun ndw-immortal-buffers ()
+  (if (or (eq (current-buffer) (get-buffer "*scratch*"))
+          (eq (current-buffer) (get-buffer "*Messages*")))
+      (progn (bury-buffer)
+             nil)
+    t))
+(add-hook 'kill-buffer-query-functions 'ndw-immortal-buffers)
+
+
 (use-package paradox)
 
 (use-package diminish
