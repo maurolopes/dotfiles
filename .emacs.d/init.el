@@ -771,13 +771,54 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   "Ensure only one theme is active at a time."
   (mapc #'disable-theme custom-enabled-themes))
 
-(use-package tangotango-theme
-  :init (load-theme 'tangotango))
+(use-package doom-themes
+  :init
+  (load-theme 'doom-tomorrow-night t)
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+
+  ;; Enable custom neotree theme (all-the-icons must be installed!)
+  (doom-themes-neotree-config)
+  ;; or for treemacs users
+  (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
+  (doom-themes-treemacs-config)
+
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
+
+;; (use-package tangotango-theme
+;;   :init (load-theme 'tangotango)
+;;   :config
+;;   (custom-theme-set-faces
+;;    'tangotango
+
+;;    '(company-preview
+;;      ((t (:inherit escape-glyph))))
+;;    '(company-preview-common
+;;      ((t (:inherit escape-glyph))))
+;;    '(company-tooltip
+;;      ((t (:inherit company-preview))))
+;;    '(company-tooltip-selection
+;;      ((t (:inherit highlight))))
+
+;;    '(company-tooltip-common
+;;      ((((type x)) (:inherit company-tooltip ))
+;;       (t (:inherit company-tooltip))))
+;;    '(company-tooltip-common-selection
+;;      ((((type x)) (:inherit company-tooltip-selection))
+;;       (t (:inherit company-tooltip-selection))))
+
+;;    '(company-tooltip-annotation
+;;      ((t (:inherit company-tooltip))))
+;;    '(company-tooltip-annotation-selection
+;;      ((t (:inherit company-tooltip-selection))))))
 
 (put 'scroll-left 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
 
-(use-package edit-server ; edit from web browser
+(use-package edit-server                ; edit from web browser
   :ensure t
   :defer nil
   :config (edit-server-start))
