@@ -16,8 +16,7 @@
 
 (setq site-run-file nil)
 
-(unless (and (display-graphic-p) (eq system-type 'darwin))
-  (push '(menu-bar-lines . 0) default-frame-alist))
+(push '(menu-bar-lines . 0) default-frame-alist)
 (push '(tool-bar-lines . 0) default-frame-alist)
 (push '(vertical-scroll-bars) default-frame-alist)
 
@@ -57,6 +56,14 @@
              '("melpa" . "https://melpa.org/packages/"))
 
 
+(use-package no-littering               ; Keep .emacs.d clean
+  :defer nil
+  :config
+  (require 'no-littering)
+  (setq auto-save-file-name-transforms `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))
+        backup-directory-alist `((".*" . ,(no-littering-expand-var-file-name "backup/")))))
+
+
 (straight-use-package
  '(gcmh
    :type git
@@ -65,9 +72,56 @@
 (require 'gcmh)
 (gcmh-mode 1)
 
-;; TODO: Remove custom.el eventually
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(load custom-file)
+;; Global settings
+(blink-cursor-mode t)
+(column-number-mode t)
+(global-display-line-numbers-mode t)
+(global-font-lock-mode t)
+(global-subword-mode t)
+(electric-pair-mode t)
+(set-face-attribute 'default nil :family "Hack" :height 100)
+(set-face-attribute 'line-number-current-line nil :inherit 'line-number :foreground "orange")
+
+(setq auto-package-update-delete-old-versions t)
+(setq auto-package-update-hide-results t)
+(setq bidi-paragraph-direction 'left-to-right)
+(setq column-enforce-column 128)
+(setq compilation-ask-about-save nil)
+(setq compilation-message-face 'default)
+(setq compilation-read-command nil)
+(setq compilation-scroll-output 'first-error)
+(setq compilation-window-height 10)
+(setq create-lockfiles nil)
+(setq display-line-numbers-widen t)
+(setq enable-recursive-minibuffers t)
+(setq fill-column 80)
+(setq indent-tabs-mode nil)
+(setq indicate-empty-lines t)
+(setq inhibit-startup-screen t)
+(setq initial-scratch-message nil)
+(setq kept-new-versions 6)
+(setq load-prefer-newer t)
+(setq maximum-scroll-margin 0.5)
+(setq read-process-output-max (* 1024 1024))
+(setq ring-bell-function 'ignore)
+(setq save-interprogram-paste-before-kill t)
+(setq scroll-margin 99999)
+(setq scroll-preserve-screen-position t)
+(setq show-paren-delay 0.0)
+(setq show-paren-mode t)
+(setq sp-highlight-pair-overlay nil)
+(setq use-package-always-ensure t)
+(setq use-package-minimum-reported-time 0)
+(setq use-package-verbose t)
+(setq version-control t)
+(setq vlf-tune-enabled nil)
+
+(setq custom-file (expand-file-name (format "emacs-custom-%s.el" (user-uid)) temporary-file-directory))
+
+(setq delete-old-versions t)
+
+;; Global keys
+
 
 ;; Make some buffers immortal
 (defun ndw-immortal-buffers ()
@@ -79,7 +133,19 @@
 (add-hook 'kill-buffer-query-functions 'ndw-immortal-buffers)
 
 
-(use-package paradox)
+(require 'dired)
+(setq dired-dwim-target t)
+(setq dired-listing-switches "-lah")
+(setq dired-sidebar-subtree-line-prefix "   ")
+(setq dired-subtree-line-prefix "   ")
+
+(use-package paradox
+  :custom
+  (paradox-column-width-package 40)
+  (paradox-column-width-star 5)
+  (paradox-column-width-version 13)
+  (paradox-execute-asynchronously t)
+  (paradox-github-token t))
 
 (use-package diminish
   :config (diminish 'subword-mode))
@@ -102,15 +168,13 @@
   :defer nil
   :config (ws-butler-global-mode t))
 
-(use-package no-littering               ; Keep .emacs.d clean
-  :defer nil
-  :config
-  (require 'no-littering)
-  (setq auto-save-file-name-transforms `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))
-        backup-directory-alist `((".*" . ,(no-littering-expand-var-file-name "backup/")))))
-
 (use-package recentf
   :after (no-littering)
+  :custom
+  (recentf-auto-cleanup 'never)
+  (recentf-max-menu-items 20)
+  (recentf-max-saved-items 500)
+
   :config (progn
             (add-to-list 'recentf-exclude no-littering-etc-directory)
             (add-to-list 'recentf-exclude no-littering-var-directory)
@@ -118,7 +182,9 @@
 
 (use-package keyfreq
   :init (progn (add-hook 'after-init-hook 'keyfreq-mode t)
-               (add-hook 'after-init-hook 'keyfreq-autosave-mode t)))
+               (add-hook 'after-init-hook 'keyfreq-autosave-mode t))
+  :custom
+  (git-gutter-fr:side 'right-fringe))
 
 (use-package git-gutter-fringe
   :config (global-git-gutter-mode t))
@@ -133,6 +199,12 @@
   :init
   (setq which-key-idle-delay 0.5
         which-key-idle-secondary-delay 0.0)
+  :custom
+  (which-key-idle-delay 0.5)
+  (which-key-show-transient-maps t)
+  (which-key-side-window-max-height 0.75)
+  (which-key-sort-order 'which-key-prefix-then-key-order)
+
   :config (which-key-mode +1))
 
 (use-package undo-tree
@@ -162,6 +234,11 @@
     (use-package ivy-historian
       :config (ivy-historian-mode t)))
   (ivy-mode +1)
+  :custom
+  (ivy-count-format "(%d/%d) ")
+  (ivy-height 20)
+  (ivy-use-virtual-buffers t)
+  (ivy-virtual-abbreviate 'full)
   :config
   (ivy-mode +1)
   (define-key ivy-minibuffer-map (kbd "<C-down>") 'ivy-next-history-element)
@@ -173,7 +250,12 @@
   :config (require 'hydra))
 
 (use-package avy
-  :bind ("C-n" . avy-goto-word-1)) ; avy-goto-subword-1 sometimes hangs
+  :bind ("C-n" . avy-goto-word-1) ; avy-goto-subword-1 sometimes hangs
+  :custom
+  (avy-keys (string-to-list "oiendhwfpyulgjzxcvmbkarst"))
+  (avy-subword-extra-word-chars nil)
+  :custom-face
+  (avy-lead-face ((t (:foreground "#870000" :weight bold)))))
 
 (let ((mcl/zap-up-to-char-last-char-arg ?a))
   (defun mcl/zap-up-to-char (arg char)
@@ -191,14 +273,24 @@
 (use-package company
   :defer nil
   :diminish nil
-  :config (global-company-mode))
+  :config (global-company-mode)
+  :custom
+  (company-dabbrev-downcase nil)
+  (company-dabbrev-ignore-case nil)
+  (company-idle-delay 0.4)
+  (company-minimum-prefix-length 1)
+  (company-require-match nil)
+  (company-tooltip-align-annotations t)
+  (company-tooltip-minimum-width 15))
 
 (use-package company-box
   :requires (company)
   :defer nil
   :after (all-the-icons company)
   :delight (company-box-mode nil company-box)
-  :hook (company-mode . company-box-mode))
+  :hook (company-mode . company-box-mode)
+  :custom
+  (company-box-doc-delay 0))
 
 (use-package column-enforce-mode
   :diminish nil
@@ -220,13 +312,18 @@
          ([remap move-end-of-line] . mwim-end-of-code-or-line)))
 
 (use-package amx         ; better M-x interface -- integrates with Ivy
+  :defer nil
   :diminish "amx"
   :requires (ivy)
   :config
-  (amx-mode t))
+  (amx-mode t)
+  :custom
+  (amx-history-length 32))
 
 (use-package counsel
   :diminish ""
+  :custom
+  (counsel-ag-base-command "ag --nocolor --nogroup --hidden %s")
   :config (counsel-mode)
   (with-eval-after-load 'helpful
     (setq counsel-describe-function-function #'helpful-callable)
@@ -258,7 +355,9 @@
   :config (require 'vlf-setup))
 
 (use-package expand-region
-  :bind ("C-=" . er/expand-region))
+  :bind ("C-=" . er/expand-region)
+  :custom
+  (expand-region-contract-fast-key "DEL"))
 
 (defhydra multiple-cursors-hydra (:columns 3)
   ("l" mc/edit-lines "edit lines" :exit t)
@@ -275,7 +374,9 @@
   ;; alternative: https://github.com/victorhge/iedit
   ;; TODO: fix some functions
   :after (hydra)
-  :bind ("C-x m" . #'multiple-cursors-hydra/body))
+  :bind ("C-x m" . #'multiple-cursors-hydra/body)
+  :custom
+  (mc/always-run-for-all t))
 
 (use-package rainbow-delimiters
   :defer nil
@@ -599,9 +700,6 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 
 (define-key minibuffer-local-map (kbd "<return>") 'exit-minibuffer)
 
-(use-package eval-sexp-fu
-  :commands turn-on-eval-sexp-fu-flash-mode)
-
 (use-package smartparens
   :defer nil
   :diminish "{}"
@@ -650,20 +748,25 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   :diminish ""
   :bind ("C-c r" . cider-ns-refresh)
   :custom
-  (cider-prompt-for-symbol nil)
-  (cider-repl-pretty-print-width 250)
-  (cider-jdk-src-paths '("~/.java/openjv-8-src/"
-                         "~/src/opensource/clojure/src/jvm"))
+  ;; (cider-jdk-src-paths '("~/.java/openjv-8-src/"
+  ;;                        "~/src/opensource/clojure/src/jvm"))
+  (cider-lein-command "~/bin/lein")
+  (cider-ns-save-files-on-refresh t)
+  (cider-prompt-for-symbol nil t)
+  (cider-repl-display-help-banner nil)
+  (cider-repl-pretty-print-width 250 t)
+  (cider-repl-use-pretty-printing t)
+  (cider-save-file-on-load t)
+
   :hook
   ((cider-repl-mode . enable-paredit-mode)
    (cider-mode . eldoc-mode)))
 
-(use-package cider-eval-sexp-fu
-  :after (cider eval-sexp-fu)
-  :commands cider-esf--bounds-of-last-sexp)
-
 (use-package clojure-mode
   :bind (("C-c ;" . clojure-toggle-keyword-string))
+  :custom
+  (clojure-align-binding-forms
+   '("let" "when-let" "when-some" "if-let" "if-some" "binding" "loop" "doseq" "for" "with-open" "with-local-vars" "with-redefs"))
   :config (progn ;; Clojure indentation
             (put 'definterceptor 'clojure-doc-string-elt 2)
             (put 't/defschema 'clojure-doc-string-elt 2)))
@@ -684,7 +787,13 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 
 (use-package lsp-ui
   :requires (lsp-mode)
-  :commands lsp-ui-mode)
+  :commands lsp-ui-mode
+  :custom
+  (lsp-ui-doc-border "#5d737a")
+  (lsp-ui-doc-include-signature t)
+  (lsp-ui-doc-position 'bottom)
+  (lsp-ui-peek-enable nil)
+  (lsp-ui-sideline-enable nil))
 
 (use-package company-lsp
   :requires (company lsp-mode)
@@ -757,7 +866,9 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 
 (use-package python
   :defer 10
-  :hook python-mode-hook)
+  :hook python-mode-hook
+  :custom
+  (python-shell-interpreter "ipython3"))
 
 (use-package ein
   :requires (company)
@@ -880,7 +991,10 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 (use-package beacon
   :diminish beacon-mode
   :init
-  (beacon-mode 1))
+  (beacon-mode 1)
+  :custom
+  (beacon-blink-when-point-moves-horizontally 10)
+  (beacon-blink-when-point-moves-vertically 1))
 
 (use-package all-the-icons
   :defer nil
