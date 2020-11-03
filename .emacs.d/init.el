@@ -109,7 +109,6 @@
 (setq scroll-margin 99999)
 (setq scroll-preserve-screen-position t)
 (setq show-paren-delay 0.0)
-(setq show-paren-mode t)
 (setq sp-highlight-pair-overlay nil)
 (setq use-package-always-ensure t)
 (setq use-package-minimum-reported-time 0)
@@ -696,6 +695,7 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   :config
   (progn
     (require 'smartparens-config)
+    (show-smartparens-global-mode 1)
     (smartparens-global-strict-mode 1)))
 
 (use-package smart-jump
