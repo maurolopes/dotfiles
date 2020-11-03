@@ -894,14 +894,26 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 
 (use-package js2-mode
   :mode (("\\.js\\'" . js2-mode)
-         ("\\.jsx\\'" . js2-jsx-mode)))
+         ("\\.jsx\\'" . js2-jsx-mode))
+  :config
+  (setq js-indent-level 2))
 
 (use-package json-mode
-  :defer nil)
+  :defer nil
+  :config
+  (setq js-indent-level 2))
 
 (use-package typescript-mode
   :mode (("\\.ts\\'" . typescript-mode)
-         ("\\.tsx\\'" . typescript-mode)))
+         ("\\.tsx\\'" . typescript-mode))
+  :config
+  (setq typescript-indent-level 2))
+
+(use-package prettier-js
+  :hook ((js2-mode . prettier-js-mode)
+         (typescript-mode . prettier-js-mode))
+  :config
+  (setq prettier-js-show-errors nil))
 
 ;; End of Javascript
 
