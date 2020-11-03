@@ -81,6 +81,7 @@
 (electric-pair-mode t)
 (set-face-attribute 'default nil :family "Hack" :height 100)
 (set-face-attribute 'line-number-current-line nil :inherit 'line-number :foreground "orange")
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 (setq auto-package-update-delete-old-versions t)
 (setq auto-package-update-hide-results t)
@@ -122,16 +123,29 @@
 
 ;; Global keys
 
+(bind-key "C-/" 'hippie-expand)
+(bind-key "C-." 'repeat)
+(bind-key "C-^" (lambda () (interactive) (delete-indentation t))) ; join-line top-down
+
+(bind-key "M-o" 'other-window)
+
+;; Use ag until there is a fix for these:
+;; https://github.com/abo-abo/swiper/issues/2339
+;; https://github.com/hlissner/doom-emacs/issues/3038
+(bind-key "M-f" 'counsel-ag)
+
+(bind-key "C-x C-r" 'counsel-recentf)
+(bind-key "C-x C-l" 'counsel-locate)
+(bind-key "C-x C-b" 'ibuffer-jump)
 
 ;; Make some buffers immortal
-(defun ndw-immortal-buffers ()
-  (if (or (eq (current-buffer) (get-buffer "*scratch*"))
-          (eq (current-buffer) (get-buffer "*Messages*")))
-      (progn (bury-buffer)
-             nil)
-    t))
-(add-hook 'kill-buffer-query-functions 'ndw-immortal-buffers)
-
+(add-hook 'kill-buffer-query-functions
+	  (lambda ()
+	    (if (or (eq (current-buffer) (get-buffer "*scratch*"))
+		    (eq (current-buffer) (get-buffer "*Messages*")))
+		(progn (bury-buffer)
+		       nil)
+	      t)))
 
 (require 'dired)
 (setq dired-dwim-target t)
@@ -410,23 +424,6 @@
 
 ;; End of Git
 
-(bind-key "C-/" 'hippie-expand)
-(bind-key "C-." 'repeat)
-(bind-key "C-^" (lambda () (interactive) (delete-indentation t))) ; join-line top-down
-
-(bind-key "M-o" 'other-window)
-
-;; Use ag until there is a fix for these:
-;; https://github.com/abo-abo/swiper/issues/2339
-;; https://github.com/hlissner/doom-emacs/issues/3038
-(bind-key "M-f" 'counsel-ag)
-
-(bind-key "C-x C-r" 'counsel-recentf)
-(bind-key "C-x C-l" 'counsel-locate)
-(bind-key "C-x C-b" 'ibuffer-jump)
-
-(defalias 'yes-or-no-p 'y-or-n-p)
-
 (define-key emacs-lisp-mode-map (kbd "C-c C-k") 'eval-buffer)
 
 (use-package paredit
@@ -452,16 +449,6 @@
   "Return a string `[X]` if SETTING is active or `[ ]` if not."
   `(if (and (boundp ',setting) ,setting) '[x] '[_]))
 (defhydra hydra-toggle (:color amaranth)
-  "
-%(mcl/toggle-str column-number-mode) _c_olumn-number            %(mcl/toggle-str display-battery-mode) _b_attery-mode
-%(mcl/toggle-str debug-on-error) d_e_bug-on-error           %(mcl/toggle-str debug-on-quit) debug-on-q_u_it
-%(mcl/toggle-str global-git-gutter-mode) global-_G_it-gutter-mode
-%(mcl/toggle-str auto-fill-function) auto-_f_ill                %(mcl/toggle-str whitespace-mode) _w_hitespace
-%(mcl/toggle-str hl-line-mode) _h_ighlight-line           %(mcl/toggle-str global-hl-line-mode) global-_H_ighlight-line
-%(mcl/toggle-str truncate-lines) _t_runcate-lines           %(mcl/toggle-str buffer-read-only) _r_ead-only
-%(mcl/toggle-str visual-line-mode) _v_isual-line              %(mcl/toggle-str global-visual-line-mode) global-_V_isual-line
-%(mcl/toggle-str display-line-numbers-mode) display-line-_n_umbers     %(mcl/toggle-str global-display-line-numbers-mode) global-display-line-_N_umbers
-"
   ("c" column-number-mode nil)
   ("e" toggle-debug-on-error nil)
   ("u" toggle-debug-on-quit nil)
@@ -972,8 +959,6 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
 
-  ;; Enable custom neotree theme (all-the-icons must be installed!)
-  (doom-themes-neotree-config)
   ;; or for treemacs users
   (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
   (doom-themes-treemacs-config)
@@ -983,10 +968,6 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 
 (put 'scroll-left 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
-
-(use-package edit-server                ; edit from web browser
-  :defer nil
-  :config (edit-server-start))
 
 (use-package beacon
   :diminish beacon-mode
@@ -1011,33 +992,3 @@ From: github.com/magnars/.emacs.d/blob/5ff65739ebda23cfeffa6f70a3c7ecf49b6154ae/
 (use-package all-the-icons-dired
   :requires (all-the-icons)
   :hook ((dired-mode . all-the-icons-dired-mode)))
-
-(defvar mcl/pair-programming nil)
-(defun mcl/pair-programming-toggle ()
-  (interactive)
-  (if mcl/pair-programming
-      (mcl/pair-programming-disable)
-    (mcl/pair-programming-enable)))
-
-(defun mcl/global-centered-cursor-mode (arg)
-  (if (> arg 0)
-      (setq maximum-scroll-margin 0.5
-            scroll-margin 99999
-            scroll-preserve-screen-position t)
-    (setq maximum-scroll-margin 0.25
-          scroll-margin 0
-          scroll-preserve-screen-position nil)))
-
-(defun mcl/pair-programming-enable ()
-  (interactive)
-  (setq mcl/pair-programming t)
-  (mcl/global-centered-cursor-mode -1)
-  (beacon-mode +1)
-  (global-display-line-numbers-mode +1))
-
-(defun mcl/pair-programming-disable ()
-  (interactive)
-  (setq mcl/pair-programming nil)
-  (mcl/global-centered-cursor-mode +1)
-  (beacon-mode -1)
-  (global-display-line-numbers-mode -1))
